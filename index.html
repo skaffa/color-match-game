@@ -64,11 +64,15 @@
         .btn-duel:hover { background: #f97316 !important; color: var(--bg) !important; }
 
         /* Modals & Pantheon */
-        .info-modal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--card); z-index: 100; padding: 2rem; text-align: left; overflow-y: auto; border: 1px solid var(--border); }
+        .info-modal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--card); z-index: 100; padding: 2rem; text-align: left; overflow-y: auto; border: 1px solid var(--border); scroll-behavior: smooth; }
         .info-modal h2 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; color: var(--accent); display: flex; justify-content: space-between; align-items: center; }
-        .info-modal p { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 0.8rem; line-height: 1.5; }
         .info-modal h3 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-main); margin: 1.5rem 0 0.8rem 0; border-bottom: 1px solid var(--border); padding-bottom: 4px; }
-        .info-modal b { color: var(--text-main); }
+        .info-modal b { color: var(--text-main); transition: color 0.3s; }
+        
+        /* Highlight Rules inside Info */
+        .info-modal p { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 0.8rem; line-height: 1.5; transition: 0.3s; border-left: 2px solid transparent; padding-left: 6px; margin-left: -8px; }
+        .info-modal p.highlight { color: var(--text-main); border-left-color: var(--accent); background: rgba(255, 255, 255, 0.05); padding: 8px; border-radius: 0 4px 4px 0; }
+        .info-modal p.highlight b { color: var(--accent); }
         
         .pantheon-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; margin-bottom: 1.5rem; max-height: 200px; overflow-y: auto; align-content: flex-start; }
         .pantheon-swatch { width: 42px; height: 42px; border-radius: 4px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); transition: transform 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.5); }
@@ -241,7 +245,7 @@
             <div class="shared-banner-title">
                 <svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 21l2-2"></path></svg> Rivalry Duel
             </div>
-            <div class="shared-banner-text">You have been challenged! Your opponent scored <b id="duel-op-score" style="color:var(--text-main)"></b>. Can you beat it?</div>
+            <div class="shared-banner-text">You have been challenged! Your opponent scored <b id="duel-op-score" style="color:var(--text-main)"></b>. Their Ghost is active!</div>
             <div class="shared-banner-btns">
                 <button class="btn-duel" onclick="acceptDuel()">Accept Duel</button>
                 <button onclick="discardSharedConfig()">Flee</button>
@@ -296,32 +300,32 @@
             <h2>Game Rules <span style="font-size: 0.6rem; color: var(--text-muted); font-weight: normal; cursor:pointer;" onclick="toggleInfo(false)">[X]</span></h2>
             
             <h3>Game Types</h3>
-            <p><b>Solid Color:</b> The classic match mode. Use sliders to match the reference.</p>
-            <p><b>Chroma-Key (Camo):</b> Match the background precisely to make your cutout shape vanish into the pattern.</p>
-            <p><b>Color Sort (Unscramble):</b> The sliders vanish. Tap the scrambled blocks to swap them and rebuild the perfect mathematical gradient.</p>
-            <p><b>Hex-dle (Decoder):</b> 6 tries to guess the exact 6-character Hex Code (Wordle rules).</p>
-            <p><b>Haystack Acuity:</b> Grid vision test. Find the odd one out.</p>
-            <p><b>Color Telephone:</b> 10 rounds of Genetic Drift. Your output becomes the next round's target.</p>
-            <p><b>The Mixer (Midpoint):</b> Find the exact mathematical 50% midpoint between Color A and Color B.</p>
-            <p><b>Gradient Matcher:</b> 2 Colors + Angle. The next dimension of matching.</p>
-            <p><b>Palette Architect:</b> Base color is locked. Create exact harmonious schemes.</p>
-            <p><b>Studio Mode:</b> Pure utility. No timer. Lock In exports your CSS.</p>
+            <p data-rule="type-solid"><b>Solid Color:</b> The classic match mode. Use sliders to match the reference.</p>
+            <p data-rule="type-chromakey"><b>Chroma-Key (Camo):</b> Match the background precisely to make your cutout shape vanish into the pattern.</p>
+            <p data-rule="type-sort"><b>Color Sort (Unscramble):</b> The sliders vanish. Tap the scrambled blocks to swap them and rebuild the perfect mathematical gradient.</p>
+            <p data-rule="type-hexdle"><b>Hex-dle (Decoder):</b> 6 tries to guess the exact 6-character Hex Code (Wordle rules).</p>
+            <p data-rule="type-haystack"><b>Haystack Acuity:</b> Grid vision test. Find the odd one out.</p>
+            <p data-rule="type-telephone"><b>Color Telephone:</b> 10 rounds of Genetic Drift. Your output becomes the next round's target.</p>
+            <p data-rule="type-midpoint"><b>The Mixer (Midpoint):</b> Find the exact mathematical 50% midpoint between Color A and Color B.</p>
+            <p data-rule="type-gradient"><b>Gradient Matcher:</b> 2 Colors + Angle. The next dimension of matching.</p>
+            <p data-rule="type-palette"><b>Palette Architect:</b> Base color is locked. Create exact harmonious schemes.</p>
+            <p data-rule="type-studio"><b>Studio Mode:</b> Pure utility. No timer. Lock In exports your CSS.</p>
 
             <h3>Modifiers & Objectives</h3>
-            <p><b>Darkroom Mode:</b> Heavy interference. The app randomly flickers and dims, disrupting your perception of brightness.</p>
-            <p><b>WCAG Contrast:</b> Achieve 4.5:1 (AA) minimum text contrast against the target.</p>
-            <p><b>Complementary:</b> Find the exact mathematical opposite of the base color.</p>
-            <p><b>Visual Map:</b> Replaces sliders with a 2D color picker spectrum.</p>
-            <p><b>Blind Hardcore:</b> No visual reference. Rely entirely on the math code.</p>
-            <p><b>Terminal Mode:</b> No UI. Type raw CSS code from memory to match.</p>
-            <p><b>Memory Mode:</b> Target is visible for 3 seconds, then vanishes. Recall and recreate.</p>
-            <p><b>Illusion Framing:</b> Triggers the Albers Effect using violently contrasting borders.</p>
-            <p><b>Vision Simulator:</b> Apply medical colorblindness filters over the entire game.</p>
+            <p data-rule="mod-darkroom"><b>Darkroom Mode:</b> Heavy interference. The app randomly flickers and dims, disrupting your perception of brightness.</p>
+            <p data-rule="mod-wcag"><b>WCAG Contrast:</b> Achieve 4.5:1 (AA) minimum text contrast against the target.</p>
+            <p data-rule="mod-comp"><b>Complementary:</b> Find the exact mathematical opposite of the base color.</p>
+            <p data-rule="mod-map"><b>Visual Map:</b> Replaces sliders with a 2D color picker spectrum.</p>
+            <p data-rule="mod-hardcore"><b>Blind Hardcore:</b> No visual reference. Rely entirely on the math code.</p>
+            <p data-rule="mod-terminal"><b>Terminal Mode:</b> No UI. Type raw CSS code from memory to match.</p>
+            <p data-rule="mod-memory"><b>Memory Mode:</b> Target is visible for 3 seconds, then vanishes. Recall and recreate.</p>
+            <p data-rule="mod-illusion"><b>Illusion Framing:</b> Triggers the Albers Effect using violently contrasting borders.</p>
+            <p data-rule="mod-vision"><b>Vision Simulator:</b> Apply medical colorblindness filters over the entire game.</p>
             
             <h3>Features</h3>
-            <p><b>Daily Rush:</b> 60s survival. The sequence of colors is seeded globally every day.</p>
-            <p><b>Ghost Replays (Duels):</b> When sharing Duel links, your slider movements are replayed to your opponent.</p>
-            <p><b>CMYK Mode:</b> Subtractive ink mixing. Red + Green no longer makes Yellow.</p>
+            <p data-rule="feat-rush"><b>Daily Rush:</b> 60s survival. The sequence of colors is seeded globally every day.</p>
+            <p data-rule="feat-duel"><b>Ghost Replays (Duels):</b> When sharing Duel links, your slider movements are replayed to your opponent.</p>
+            <p data-rule="space-cmyk"><b>CMYK Mode:</b> Subtractive ink mixing. Red + Green no longer makes Yellow.</p>
         </div>
 
         <div class="info-modal" id="stats-modal">
@@ -525,9 +529,63 @@
     </a>
 
     <script>
-        // Ensure global access for simple inline calls
-        window.toggleInfo = function(show) { document.getElementById('info-modal').style.display = show ? 'block' : 'none'; };
-        window.toggleSettings = function(show) { document.getElementById('settings-modal').style.display = show ? 'block' : 'none'; };
+        // --- GLOBAL COMPRESSION UTILITIES ---
+        async function compressData(dataObj) {
+            const str = JSON.stringify(dataObj);
+            const stream = new Blob([str]).stream().pipeThrough(new CompressionStream('deflate-raw'));
+            const buffer = await new Response(stream).arrayBuffer();
+            const bytes = new Uint8Array(buffer);
+            let binary = ''; for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+            return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); 
+        }
+
+        async function decompressData(b64) {
+            b64 = b64.replace(/-/g, '+').replace(/_/g, '/');
+            const pad = b64.length % 4; if(pad) b64 += '='.repeat(4 - pad);
+            const binary = atob(b64); const bytes = new Uint8Array(binary.length);
+            for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+            const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+            return JSON.parse(await new Response(stream).text());
+        }
+
+        // --- GLOBALS ---
+        window.toggleInfo = function(show) { 
+            const modal = document.getElementById('info-modal');
+            modal.style.display = show ? 'block' : 'none'; 
+            
+            if (show) {
+                document.querySelectorAll('#info-modal p').forEach(p => p.classList.remove('highlight'));
+                const gameActive = document.getElementById('game-area').classList.contains('active');
+                
+                if (gameActive) {
+                    let rules = [`type-${st.type}`];
+                    if (st.spaceId === 'cmyk') rules.push('space-cmyk');
+                    if (st.isDarkroom) rules.push('mod-darkroom');
+                    if (st.isWcag) rules.push('mod-wcag');
+                    if (st.isComp) rules.push('mod-comp');
+                    if (st.isMap) rules.push('mod-map');
+                    if (st.isHardcore) rules.push('mod-hardcore');
+                    if (st.isTerminal) rules.push('mod-terminal');
+                    if (st.isMemory) rules.push('mod-memory');
+                    if (st.isIllusion) rules.push('mod-illusion');
+                    if (st.vision !== 'normal') rules.push('mod-vision');
+                    if (st.isRush) rules.push('feat-rush');
+                    if (st.isDuel) rules.push('feat-duel');
+
+                    let firstEl = null;
+                    rules.forEach(r => {
+                        const el = document.querySelector(`#info-modal p[data-rule="${r}"]`);
+                        if (el) { el.classList.add('highlight'); if (!firstEl) firstEl = el; }
+                    });
+
+                    if (firstEl) { setTimeout(() => firstEl.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50); }
+                } else {
+                    modal.scrollTop = 0; // Reset scroll if opening from main menu
+                }
+            }
+        };
+        
+        window.toggleSettings = function(show) { document.getElementById('settings-modal').style.display = show ? 'block' : 'none'; }
 
         const svgs = {
             complementary: `<svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg>`,
@@ -607,13 +665,13 @@
 
         // --- APP THEME & VISION ---
         function initTheme() { const t = localStorage.getItem('chroma_theme'); if(t) document.documentElement.style.setProperty('--accent', t); }
-        function setTheme(color) { document.documentElement.style.setProperty('--accent', color); localStorage.setItem('chroma_theme', color); togglePantheon(false); }
-        window.resetTheme = function() { document.documentElement.style.setProperty('--accent', '#ffffff'); localStorage.removeItem('chroma_theme'); toggleSettings(false); }
+        function setTheme(color) { document.documentElement.style.setProperty('--accent', color); localStorage.setItem('chroma_theme', color); window.togglePantheon(false); }
+        window.resetTheme = function() { document.documentElement.style.setProperty('--accent', '#ffffff'); localStorage.removeItem('chroma_theme'); window.toggleSettings(false); }
         window.handleVision = function() { st.vision = document.getElementById('vision-select').value; document.body.className = st.vision; saveLocal(); }
 
-        window.resetConfig = function() { localStorage.removeItem('chroma_cfg'); setUIConfig(defaultCfg); toggleSettings(false); }
-        window.resetPantheon = function() { localStorage.removeItem('chroma_pantheon_v2'); toggleSettings(false); }
-        window.resetAnalytics = function() { localStorage.removeItem('chroma_stats_v2'); toggleSettings(false); }
+        window.resetConfig = function() { localStorage.removeItem('chroma_cfg'); setUIConfig(defaultCfg); window.toggleSettings(false); }
+        window.resetPantheon = function() { localStorage.removeItem('chroma_pantheon_v2'); window.toggleSettings(false); }
+        window.resetAnalytics = function() { localStorage.removeItem('chroma_stats_v2'); window.toggleSettings(false); }
         window.resetAll = function() { localStorage.clear(); window.location.href = window.location.pathname; }
 
         function loadPantheon() { return JSON.parse(localStorage.getItem('chroma_pantheon_v2')) || []; }
@@ -625,6 +683,57 @@
                 cfg: { space: st.spaceId.toUpperCase(), type: st.type.charAt(0).toUpperCase() + st.type.slice(1), obj: st.type==='palette'?st.palRule:(st.isComp?'Complementary':st.isWcag?'WCAG':'Match'), mods: [st.isMap?'Map':'', st.isHardcore?'Blind':'', st.isTerminal?'Terminal':'', st.isIllusion?'Illusion':'', st.isMemory?'Memory':'', st.isDarkroom?'Darkroom':'', st.vision!=='normal'?st.vision:''].filter(Boolean).join(', ') || 'None' }
             };
             p.unshift(entry); localStorage.setItem('chroma_pantheon_v2', JSON.stringify(p));
+        }
+        window.togglePantheon = function(show) {
+            const m = document.getElementById('pantheon-modal');
+            if (show) {
+                document.getElementById('pantheon-details').style.display = 'none';
+                const grid = document.getElementById('pantheon-grid'); const p = loadPantheon();
+                grid.innerHTML = p.length === 0 ? '<div class="empty-pantheon">Achieve 98% or higher precision to immortalize colors here.</div>' : '';
+                p.forEach(entry => {
+                    const el = document.createElement('div'); el.className = 'pantheon-swatch';
+                    if (entry.cfg.type === 'Gradient' || entry.cfg.type === 'Palette') { el.style.background = entry.tCss; } 
+                    else { el.style.background = `linear-gradient(135deg, ${entry.tCss} 50%, ${entry.uCss} 50%)`; }
+                    el.onclick = () => showPantheonDetails(entry); grid.appendChild(el);
+                });
+            }
+            m.style.display = show ? 'block' : 'none';
+        }
+        window.showPantheonDetails = function(e) {
+            document.getElementById('pantheon-details').style.display = 'block';
+            document.getElementById('pd-target').textContent = e.tCss; document.getElementById('pd-user').textContent = e.uCss;
+            document.getElementById('pd-space').textContent = `${e.cfg.space} (${e.cfg.type})`; document.getElementById('pd-mods').textContent = e.cfg.mods; document.getElementById('pd-date').textContent = e.date;
+            const btn = document.getElementById('btn-set-theme');
+            if (e.cfg.type === 'Solid') { btn.style.display = 'block'; btn.onclick = () => setTheme(e.tCss); } else { btn.style.display = 'none'; }
+        }
+
+        // --- STATS SYSTEM ---
+        function loadStats() { return JSON.parse(localStorage.getItem('chroma_stats_v2')) || { games:0, scoreSum:0, errR:0, errG:0, errB:0, streak:0 }; }
+        function saveStats(score, dr, dg, db) {
+            if (st.type === 'studio') return;
+            let s = loadStats(); s.games++; s.scoreSum += score; s.errR += dr; s.errG += dg; s.errB += db;
+            if (st.isRush && st.rushStreak > s.streak) s.streak = st.rushStreak;
+            localStorage.setItem('chroma_stats_v2', JSON.stringify(s));
+        }
+        window.toggleStats = function(show) {
+            const m = document.getElementById('stats-modal');
+            if (show) {
+                let s = loadStats();
+                document.getElementById('st-games').textContent = s.games; document.getElementById('st-acc').textContent = s.games > 0 ? Math.round(s.scoreSum/s.games) + '%' : '0%'; document.getElementById('st-streak').textContent = s.streak;
+                if (s.games > 0) {
+                    let avgR = s.errR/s.games, avgG = s.errG/s.games, avgB = s.errB/s.games;
+                    let maxBias = Math.max(Math.abs(avgR), Math.abs(avgG), Math.abs(avgB));
+                    let p = Math.round((maxBias / 255) * 100);
+                    let text = "Balanced"; let dir = "-";
+                    if (p > 1) {
+                        if (maxBias === Math.abs(avgR)) { text = avgR>0?"Too Much Red":"Too Little Red"; dir = "RED"; }
+                        else if (maxBias === Math.abs(avgG)) { text = avgG>0?"Too Much Green":"Too Little Green"; dir = "GREEN"; }
+                        else { text = avgB>0?"Too Much Blue":"Too Little Blue"; dir = "BLUE"; }
+                    }
+                    document.getElementById('st-bias-dir').textContent = dir; document.getElementById('st-bias').textContent = p > 1 ? `${text} (~${p}%)` : "Flawless Biological Balance";
+                }
+            }
+            m.style.display = show ? 'block' : 'none';
         }
 
         // --- UI CONFIG ---
@@ -724,6 +833,17 @@
         window.acceptSharedConfig = function() { st.isViewingShared = false; document.getElementById('shared-banner').style.display = 'none'; saveLocal(); clearUrl(); }
         window.discardSharedConfig = function() { st.isViewingShared = false; document.getElementById('shared-banner').style.display = 'none'; document.getElementById('duel-banner').style.display = 'none'; st.isDuel = false; setUIConfig(loadLocal()); clearUrl(); }
         document.querySelectorAll('#setup-screen input, #setup-screen select').forEach(el => el.addEventListener('change', () => { if(st.isViewingShared){ st.isViewingShared=false; document.getElementById('shared-banner').style.display='none'; clearUrl(); } saveLocal(); }));
+
+        window.changeColorSpace = function() {
+            if (st.suppressSave) return;
+            st.spaceId = document.querySelector('input[name="colorSpace"]:checked').value; const cfg = spaces[st.spaceId];
+            [1,2,3,4].forEach(n => {
+                const g = document.getElementById(`group-s${n}`);
+                if (cfg[`s${n}`]) { g.style.display = 'block'; document.getElementById(`lbl-s${n}`).textContent = cfg[`s${n}`].lbl; const sl = document.getElementById(`slider-${n}`); sl.min = cfg[`s${n}`].min; sl.max = cfg[`s${n}`].max; 
+                } else { g.style.display = 'none'; }
+            });
+            if(!document.getElementById('map-checkbox').checked && !document.getElementById('terminal-checkbox').checked && document.getElementById('type-select').value !== 'haystack' && document.getElementById('type-select').value !== 'hexdle') window.updateColor();
+        }
 
         function mulberry32(a) { return function() { var t=a+=0x6D2B79F5; t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); return ((t^t>>>14)>>>0)/4294967296; } }
         function getDailyRNG(offset = 0) { const start = new Date('2026-03-23T00:00:00Z'); st.dailyNum = Math.floor((new Date() - start)/86400000)+1; return mulberry32(st.dailyNum*42+offset); }
@@ -887,7 +1007,7 @@
             const rb = document.getElementById('rush-badge');
             if (st.isRush) { rb.style.display='flex'; document.getElementById('rush-streak').textContent=st.rushStreak; } else { rb.style.display='none'; }
 
-            if (st.type === 'haystack') { initHaystack(); } else if (st.type === 'hexdle') { initHexdle(); } else { initRoundColors(); window.changeColorSpace(); }
+            if (st.type === 'haystack') { initHaystack(); } else if (st.type === 'hexdle') { window.initHexdle(); } else { initRoundColors(); window.changeColorSpace(); }
             
             if (st.type !== 'studio') {
                 let oTxt = st.type === 'haystack' ? "Find the Odd Color" : st.type === 'hexdle' ? "Decode the Hex" : st.type === 'sort' ? "Unscramble Gradient" : st.type === 'gradient' ? "Match the Gradient" : st.type === 'palette' ? `Build ${st.palRule} Palette` : st.type === 'midpoint' ? "Find the Midpoint" : st.type === 'chromakey' ? "Camouflage into Background" : st.type === 'telephone' ? `Drift: Round ${st.teleRound}/10` : st.isWcag ? "Pass WCAG Contrast" : "Match the Target";
@@ -935,6 +1055,15 @@
                 } else if (st.type === 'gradient') { uBox.style.background = st.renderedUserCss;
                 } else { uBox.style.background = st.renderedUserCss; }
             }
+        }
+
+        function randomizeSliders() {
+            const c = spaces[st.spaceId];
+            [1,2,3,4].forEach(n => {
+                const sl = document.getElementById(`slider-${n}`);
+                if(c[`s${n}`]) sl.value = Math.floor(Math.random() * (parseInt(sl.max) - parseInt(sl.min) + 1)) + parseInt(sl.min);
+            });
+            window.updateColor();
         }
 
         function initRoundColors() {
@@ -1096,9 +1225,13 @@
         }
 
         window.lockIn = function() {
-            if (st.type === 'studio') { const ex = document.getElementById('export-modal'); document.getElementById('export-textarea').value = buildCodeExport(); ex.style.display = 'block'; return; }
+            if (st.type === 'studio') {
+                const ex = document.getElementById('export-modal'); document.getElementById('export-textarea').value = buildCodeExport();
+                ex.style.display = 'block'; return;
+            }
             if (st.type === 'telephone' && st.teleRound < 10 && st.timeRemaining > 0) {
-                if (st.timer) clearInterval(st.timer); st.teleHistory.push({...st.currentRgb}); st.teleRound++; document.getElementById('game-objective').textContent = `Drift: Round ${st.teleRound}/10`;
+                if (st.timer) clearInterval(st.timer);
+                st.teleHistory.push({...st.currentRgb}); st.teleRound++; document.getElementById('game-objective').textContent = `Drift: Round ${st.teleRound}/10`;
                 initRoundColors(); st.timeRemaining = st.timeLimit; startTimer(); return;
             }
 
@@ -1121,6 +1254,16 @@
                     if(st.type === 'haystack') initHaystack(); else initRoundColors(); startTimer(); 
                 } else { st.finalScore = score; triggerEndScreen(); }
             } else { st.finalScore = score; triggerEndScreen(); }
+        }
+
+        window.initHexdle = function() {
+            const rng = st.isDaily ? getDailyRNG(st.dailyChallengeId + st.rushStreak) : () => Math.random();
+            if(st.isDuel) { st.hexTarget = st.duelData.tH; } 
+            else { st.hexTarget = [1,2,3].map(()=>Math.floor(rng()*256).toString(16).padStart(2,'0').toUpperCase()).join(''); }
+            st.targetRgb = hexToRgb(st.hexTarget); st.renderedTargetCss = `#${st.hexTarget}`;
+            st.hexGuesses = []; st.hexCurrentGuess = "";
+            document.getElementById('target-color').style.background = st.renderedTargetCss;
+            renderHexdle();
         }
 
         function triggerEndScreen() {
@@ -1200,11 +1343,16 @@
             }
         }
 
-        window.shareDuel = function() {
-            let teleArr = []; if(st.type==='telephone') teleArr = st.teleHistory;
-            const data = { c: getUIConfig(), tV: (st.type==='solid'||st.type==='midpoint'||st.type==='telephone'||st.type==='chromakey')?st.targetVals:null, tN: (st.type==='gradient'||st.type==='midpoint')?st.targetNativeData:null, tD: st.type==='gradient'?st.gradDeg:null, tC: st.type==='palette'?st.targetColorData:null, tCss: st.type==='palette'?st.targetCssData:null, tH: st.type==='hexdle'?st.hexTarget:null, sT: st.type==='sort'?st.sortTarget:null, sC: st.type==='sort'?st.sortCurrent:null, uBase: st.type==='palette'?st.userNativeData[0]:null, uC: st.type==='palette'?st.userCssData:st.renderedUserCss, oS: st.finalScore, gL: st.type==='telephone'?teleArr:st.ghostLog };
-            const qs = `?duel=1&d=${btoa(JSON.stringify(data))}`; navigator.clipboard.writeText(window.location.origin + window.location.pathname + qs);
-            document.getElementById('btn-challenge').innerHTML = '<span>Link Copied!</span>'; setTimeout(() => document.getElementById('btn-challenge').innerHTML = `${svgs.duel} <span>Challenge a Friend</span>`, 2000);
+        window.shareDuel = async function() {
+            const btn = document.getElementById('btn-challenge');
+            const orig = btn.innerHTML; btn.textContent = 'Compressing...';
+            try {
+                let teleArr = []; if(st.type==='telephone') teleArr = st.teleHistory;
+                const data = { c: getUIConfig(), tV: (st.type==='solid'||st.type==='midpoint'||st.type==='telephone'||st.type==='chromakey')?st.targetVals:null, tN: (st.type==='gradient'||st.type==='midpoint')?st.targetNativeData:null, tD: st.type==='gradient'?st.gradDeg:null, tC: st.type==='palette'?st.targetColorData:null, tCss: st.type==='palette'?st.targetCssData:null, tH: st.type==='hexdle'?st.hexTarget:null, sT: st.type==='sort'?st.sortTarget:null, sC: st.type==='sort'?st.sortCurrent:null, uBase: st.type==='palette'?st.userNativeData[0]:null, uC: st.type==='palette'?st.userCssData:st.renderedUserCss, oS: st.finalScore, gL: st.type==='telephone'?teleArr:st.ghostLog };
+                const b64 = await compressData(data); const qs = `?duel=1&d=${b64}`;
+                navigator.clipboard.writeText(window.location.origin + window.location.pathname + qs);
+                btn.innerHTML = '<span>Link Copied!</span>'; setTimeout(() => btn.innerHTML = orig, 2000);
+            } catch (e) { btn.textContent = 'Error!'; setTimeout(() => btn.innerHTML = orig, 2000); }
         }
 
         window.shareScore = function() {
@@ -1225,9 +1373,16 @@
             window.changeColorSpace();
         }
 
-        window.onload = () => {
+        window.onload = async () => {
             initTheme(); getDailyRNG(0)(); document.getElementById('daily-day-display').textContent = st.dailyNum;
-            const c = checkUrl(); if (st.isDuel) { } else if (c) { st.isViewingShared=true; setUIConfig(c); document.getElementById('shared-banner').style.display='block'; } else { setUIConfig(loadLocal()); }
+            const p = new URLSearchParams(window.location.search);
+            if (p.has('duel') && p.has('d')) {
+                try { st.duelData = await decompressData(p.get('d')); st.isDuel = true; document.getElementById('duel-op-score').textContent = st.duelData.oS + '%'; document.getElementById('duel-banner').style.display = 'block';
+                } catch(e) { clearUrl(); setUIConfig(loadLocal()); }
+            } else if (p.has('share')) {
+                st.isViewingShared = true; document.getElementById('shared-banner').style.display='block';
+                setUIConfig({ s:p.get('s'), t:parseInt(p.get('t')), o:p.get('o'), p:p.get('p')||'solid', pr:p.get('pr')||'analogous', v:p.get('v')||'normal', m:p.get('m')==='1', h:p.get('h')==='1', i:p.get('i')==='1', tm:p.get('tm')==='1', mm:p.get('mm')==='1', dk:p.get('dk')==='1' });
+            } else { setUIConfig(loadLocal()); }
         };
     </script>
 </body>
