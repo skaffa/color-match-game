@@ -31,21 +31,21 @@
         .header-btns { display: flex; gap: 8px; }
         .header-btn { flex: none; width: 26px; height: 26px; padding: 0; border: 1px solid var(--border); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: 0.2s; background: var(--bg); }
         .header-btn:hover { color: var(--bg); background: var(--text-muted); }
-        .pantheon-btn { color: var(--accent); border-color: rgba(255,255,255,0.2); }
-        .pantheon-btn:hover { background: var(--accent); color: var(--bg); }
+        .pantheon-btn { color: #facc15; border-color: rgba(250, 204, 21, 0.3); }
+        .pantheon-btn:hover { background: #facc15; color: var(--bg); }
 
         .game-setup, .daily-menu, .game-area, .results, .info-modal { display: none; }
         .active { display: block; }
 
         /* Banners */
-        .shared-banner { position: absolute; top: calc(100% + 15px); left: 0; width: 100%; background: var(--card); border: 1px solid var(--accent); padding: 16px; border-radius: 4px; text-align: left; box-shadow: 0 20px 50px rgba(0,0,0,0.5); z-index: 50;}
+        .shared-banner { position: absolute; top: calc(100% + 15px); left: 0; width: 100%; background: var(--card); border: 1px solid #3b82f6; padding: 16px; border-radius: 4px; text-align: left; box-shadow: 0 20px 50px rgba(0,0,0,0.5); z-index: 50;}
         .duel-banner { border-color: #f97316; background: rgba(249, 115, 22, 0.05); }
         .duel-banner .shared-banner-title { color: #f97316; display: flex; align-items: center; gap: 6px; }
-        .shared-banner-title { font-size: 0.65rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+        .shared-banner-title { font-size: 0.65rem; font-weight: 700; color: #3b82f6; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
         .shared-banner-text { font-size: 0.7rem; color: var(--text-main); margin-bottom: 12px; line-height: 1.4; }
         .shared-banner-btns { display: flex; gap: 8px; }
-        .shared-banner-btns button { padding: 10px; font-size: 0.6rem; border-color: var(--accent); color: var(--accent); }
-        .shared-banner-btns button:hover { background: var(--accent); color: var(--bg); }
+        .shared-banner-btns button { padding: 10px; font-size: 0.6rem; border-color: #3b82f6; color: #3b82f6; }
+        .shared-banner-btns button:hover { background: #3b82f6; color: var(--bg); }
         .btn-duel { border-color: #f97316 !important; color: #f97316 !important; }
         .btn-duel:hover { background: #f97316 !important; color: var(--bg) !important; }
 
@@ -61,7 +61,7 @@
         .empty-pantheon { font-size: 0.7rem; color: var(--text-muted); text-align: center; width: 100%; padding: 2rem 0; font-style: italic; }
         
         .pantheon-details { border-top: 1px solid var(--border); padding-top: 1rem; display: none; }
-        .pd-title { font-size: 0.65rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; display:flex; justify-content: space-between; align-items: center; }
+        .pd-title { font-size: 0.65rem; font-weight: 700; color: #facc15; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; display:flex; justify-content: space-between; align-items: center; }
         .pd-stat { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
         .pd-stat span { color: var(--text-main); font-family: monospace; text-align: right; word-break: break-all; max-width: 60%; }
         .btn-theme { padding: 4px 8px; font-size: 0.55rem; background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 2px; cursor: pointer; }
@@ -139,7 +139,7 @@
 
         /* Terminal Input */
         .terminal-input-wrapper { display: flex; align-items: center; gap: 10px; border: 1px solid var(--border); background: var(--bg); padding: 12px; margin-bottom: 2rem; border-radius: 4px; }
-        .terminal-prompt { color: var(--accent); font-family: monospace; font-weight: bold; font-size: 1rem; }
+        .terminal-prompt { color: #22c55e; font-family: monospace; font-weight: bold; font-size: 1rem; }
         #terminal-input { flex: 1; background: transparent; border: none; color: var(--accent); font-family: monospace; font-size: 0.9rem; outline: none; }
 
         /* Buttons */
@@ -162,6 +162,10 @@
         .stat-val { font-size: 1.2rem; font-weight: 200; color: var(--accent); margin-bottom: 4px; }
         .stat-lbl { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
         .bias-card { grid-column: span 2; }
+
+        /* Subtle GitHub Logo */
+        .github-link { position: fixed; bottom: 20px; right: 20px; color: var(--text-muted); opacity: 0.5; transition: 0.2s; z-index: 100; display: flex; align-items: center; justify-content: center; }
+        .github-link:hover { opacity: 1; color: var(--text-main); transform: scale(1.1); }
     </style>
 </head>
 <body>
@@ -437,6 +441,12 @@
         </div>
     </div>
 
+    <a href="#" target="_blank" class="github-link" title="View Source on GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+    </a>
+
     <script>
         // Ensure global access for simple inline calls
         window.toggleInfo = function(show) { document.getElementById('info-modal').style.display = show ? 'block' : 'none'; };
@@ -510,7 +520,7 @@
         function initTheme() { const t = localStorage.getItem('chroma_theme'); if(t) document.documentElement.style.setProperty('--accent', t); }
         function setTheme(color) { document.documentElement.style.setProperty('--accent', color); localStorage.setItem('chroma_theme', color); togglePantheon(false); }
         window.resetTheme = function() { document.documentElement.style.setProperty('--accent', '#ffffff'); localStorage.removeItem('chroma_theme'); toggleSettings(false); }
-        function handleVision() { st.vision = document.getElementById('vision-select').value; document.body.className = st.vision; saveLocal(); }
+        window.handleVision = function() { st.vision = document.getElementById('vision-select').value; document.body.className = st.vision; saveLocal(); }
 
         window.resetConfig = function() { localStorage.removeItem('chroma_cfg'); setUIConfig(defaultCfg); toggleSettings(false); }
         window.resetPantheon = function() { localStorage.removeItem('chroma_pantheon_v2'); toggleSettings(false); }
@@ -542,7 +552,7 @@
             }
             m.style.display = show ? 'block' : 'none';
         }
-        function showPantheonDetails(e) {
+        window.showPantheonDetails = function(e) {
             document.getElementById('pantheon-details').style.display = 'block';
             document.getElementById('pd-target').textContent = e.tCss; document.getElementById('pd-user').textContent = e.uCss;
             document.getElementById('pd-space').textContent = `${e.cfg.space} (${e.cfg.type})`; document.getElementById('pd-mods').textContent = e.cfg.mods; document.getElementById('pd-date').textContent = e.date;
@@ -614,7 +624,7 @@
                 document.getElementById('hardcore-checkbox').disabled = m || tm || mm;
                 document.getElementById('terminal-checkbox').disabled = m || h;
                 document.getElementById('memory-checkbox').disabled = h;
-                document.getElementById('objective-select').options[2].disabled = m || tm || h; // Disable WCAG if Map/Blind/Terminal
+                document.getElementById('objective-select').options[2].disabled = m || tm || h;
             } else {
                 document.getElementById('map-checkbox').disabled = true; document.getElementById('hardcore-checkbox').disabled = true; document.getElementById('terminal-checkbox').disabled = true; document.getElementById('memory-checkbox').disabled = true;
             }
@@ -737,6 +747,22 @@
             }
         }
 
+        function calcComp(v) {
+            if(st.spaceId==='rgb') return [255-v[0],255-v[1],255-v[2]];
+            if(st.spaceId==='hsl'||st.spaceId==='oklch') return [v[0],v[1],(v[2]+180)%360];
+            if(st.spaceId==='oklab') return [v[0],-v[1],-v[2]];
+            if(st.spaceId==='cmyk') return [100-v[0],100-v[1],100-v[2],100-v[3]];
+        }
+        
+        function calcPalette(baseVals, rule) {
+            const hIdx = st.spaceId === 'hsl' ? 0 : 2;
+            let c2 = [...baseVals], c3 = [...baseVals];
+            if (rule === 'analogous') { c2[hIdx] = (baseVals[hIdx] + 30) % 360; c3[hIdx] = (baseVals[hIdx] + 330) % 360; } 
+            else if (rule === 'triadic') { c2[hIdx] = (baseVals[hIdx] + 120) % 360; c3[hIdx] = (baseVals[hIdx] + 240) % 360; } 
+            else if (rule === 'split') { c2[hIdx] = (baseVals[hIdx] + 150) % 360; c3[hIdx] = (baseVals[hIdx] + 210) % 360; }
+            return [baseVals, c2, c3];
+        }
+
         // --- GHOST SYSTEM ---
         function recordGhost() {
             if (st.isMap || st.isTerminal || st.type === 'studio' || st.type === 'haystack') return; 
@@ -779,7 +805,7 @@
         }
         window.playAgain = function() { if (st.type === 'studio') { resetGame(); } else if (st.isRush) { startRush(); } else if (st.isDuel) { acceptDuel(); } else { executeGameStart(); } }
 
-        function executeGameStart() {
+        window.executeGameStart = function() {
             st.memoryHidden = false; st.haystackCorrect = 0;
             if(st.timer) { clearInterval(st.timer); st.timer = null; }
             if(st.memoryTimeout) { clearTimeout(st.memoryTimeout); st.memoryTimeout = null; }
@@ -1010,7 +1036,7 @@
             document.getElementById('timer').textContent = st.timeRemaining.toString().padStart(2, '0');
             st.timer = setInterval(() => {
                 st.timeRemaining--; document.getElementById('timer').textContent = st.timeRemaining.toString().padStart(2, '0');
-                if (st.timeRemaining <= 0) { lockIn(); }
+                if (st.timeRemaining <= 0) { window.lockIn(); }
             }, 1000);
         }
 
@@ -1068,8 +1094,8 @@
             if (score >= 98 && !st.isDuel && st.type !== 'haystack') saveToPantheon(st.renderedTargetCss, st.renderedUserCss);
 
             if (st.isRush && st.timeRemaining > 0) {
-                if (score >= 90 || (st.type === 'haystack' && st.timeRemaining > 0)) { // Haystack passes naturally if time > 0
-                    if(st.type !== 'haystack') { st.rushStreak++; st.timeRemaining += (score >= 98 ? 10 : 5); } // Haystack logic handled internally
+                if (score >= 90 || (st.type === 'haystack' && st.timeRemaining > 0)) { 
+                    if(st.type !== 'haystack') { st.rushStreak++; st.timeRemaining += (score >= 98 ? 10 : 5); } 
                     document.getElementById('rush-streak').textContent = st.rushStreak;
                     if(st.type === 'haystack') initHaystack(); else initRoundColors(); 
                     startTimer(); 
