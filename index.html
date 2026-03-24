@@ -417,7 +417,7 @@
         let st = {
             isDaily:false, dailyId:null, isViewingShared:false, suppressSave:false,
             isRush:false, rushStreak:0, isDuel:false, duelData:null,
-            spaceId:'rgb', timeLimit:30, timeRemaining:0, timer:null, memoryTimeout:null,
+            spaceId:'rgb', timeLimit:30, timeRemaining:0, timer:null, memoryTimeout:null, memoryHidden:false,
             isComp:false, isMap:false, isHardcore:false, isIllusion:false, isTerminal:false, isMemory:false,
             type:'solid', palRule:'analogous', uiTab:0, finalScore:0,
             
@@ -627,8 +627,6 @@
         function discardSharedConfig() { st.isViewingShared = false; document.getElementById('shared-banner').style.display = 'none'; document.getElementById('duel-banner').style.display = 'none'; st.isDuel = false; setUIConfig(loadLocal()); clearUrl(); }
         document.querySelectorAll('#setup-screen input, #setup-screen select').forEach(el => el.addEventListener('change', () => { if(st.isViewingShared){ st.isViewingShared=false; document.getElementById('shared-banner').style.display='none'; clearUrl(); } saveLocal(); }));
 
-        function toggleInfo(show) { document.getElementById('info-modal').style.display = show ? 'block' : 'none'; }
-        
         function changeColorSpace() {
             if (st.suppressSave) return;
             st.spaceId = document.querySelector('input[name="colorSpace"]:checked').value; const cfg = spaces[st.spaceId];
@@ -770,6 +768,7 @@
         }
 
         function executeGameStart() {
+            st.memoryHidden = false;
             if(st.timer) { clearInterval(st.timer); st.timer = null; }
             if(st.memoryTimeout) { clearTimeout(st.memoryTimeout); st.memoryTimeout = null; }
             if(st.ghostTimer) { clearInterval(st.ghostTimer); st.ghostTimer = null; }
@@ -808,14 +807,10 @@
             if(st.isMemory) {
                 document.getElementById('game-objective').textContent = "Memorize the Target!"; document.getElementById('game-objective').style.color = '#facc15';
                 st.memoryTimeout = setTimeout(() => {
+                    st.memoryHidden = true;
                     document.getElementById('game-objective').textContent = st.isComp ? "Remake Complement from Memory!" : "Remake from Memory!";
                     document.getElementById('game-objective').style.color = 'var(--accent)';
-                    const tBox = document.getElementById('target-color');
-                    if(st.type === 'palette') {
-                        tBox.innerHTML = '<div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--bg);"><span style="font-size:1.5rem;">???</span></div>';
-                    } else {
-                        tBox.style.background = 'var(--bg)'; tBox.style.textShadow = 'none'; tBox.innerHTML = '<span style="font-size:1.5rem;">???</span>';
-                    }
+                    renderBoxes();
                 }, 3000);
             } else { document.getElementById('game-objective').style.color = 'var(--accent)'; document.getElementById('game-objective').textContent = oTxt; }
 
@@ -832,13 +827,29 @@
 
         function renderBoxes() {
             const tBox = document.getElementById('target-color'); const uBox = document.getElementById('user-color');
+            
+            if (!(st.isMemory && st.memoryHidden)) {
+                if (st.type === 'palette') {
+                    for(let i=0; i<3; i++) { tBox.children[i].style.background = st.targetCssData[i]; }
+                } else if (st.type === 'gradient') {
+                    tBox.style.background = st.renderedTargetCss;
+                } else {
+                    if (st.isHardcore && !st.isMemory) { tBox.style.background = 'var(--bg)'; tBox.textContent = st.renderedTargetCss; }
+                    else { tBox.style.background = st.renderedTargetCss; }
+                }
+            } else if (st.isMemory && st.memoryHidden) {
+                if(st.type === 'palette') {
+                    tBox.innerHTML = '<div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--bg); border-radius:2px;"><span style="font-size:1.5rem;">???</span></div>';
+                } else {
+                    tBox.style.background = 'var(--bg)'; tBox.style.textShadow = 'none'; tBox.innerHTML = '<span style="font-size:1.5rem;">???</span>';
+                }
+            }
+            
             if (st.type === 'palette') {
-                for(let i=0; i<3; i++) { tBox.children[i].style.background = st.targetCssData[i]; uBox.children[i].style.background = st.userCssData[i]; }
+                for(let i=0; i<3; i++) { uBox.children[i].style.background = st.userCssData[i]; }
             } else if (st.type === 'gradient') {
-                tBox.style.background = st.renderedTargetCss; uBox.style.background = st.renderedUserCss;
+                uBox.style.background = st.renderedUserCss;
             } else {
-                if (st.isHardcore && !st.isMemory) { tBox.style.background = 'var(--bg)'; tBox.textContent = st.renderedTargetCss; }
-                else { tBox.style.background = st.renderedTargetCss; }
                 uBox.style.background = st.renderedUserCss;
             }
         }
@@ -1006,6 +1017,8 @@
             if (st.memoryTimeout) { clearTimeout(st.memoryTimeout); st.memoryTimeout = null; }
             if (st.ghostTimer) { clearInterval(st.ghostTimer); st.ghostTimer = null; }
 
+            st.memoryHidden = false; // Reveal the color if it was hidden
+
             const score = calculateScore();
             if (st.type === 'solid') saveStats(score, st.currentRgb.r - st.targetRgb.r, st.currentRgb.g - st.targetRgb.g, st.currentRgb.b - st.targetRgb.b);
             if (score >= 98 && !st.isDuel) saveToPantheon(st.renderedTargetCss, st.renderedUserCss);
@@ -1020,6 +1033,9 @@
         }
 
         function triggerEndScreen() {
+            if (st.timer) { clearInterval(st.timer); st.timer = null; }
+            if (st.memoryTimeout) { clearTimeout(st.memoryTimeout); st.memoryTimeout = null; }
+            
             const tBox=document.getElementById('target-color'), ft=document.getElementById('frame-target'), fu=document.getElementById('frame-user');
             ft.classList.remove('active-illusion'); fu.classList.remove('active-illusion'); ft.style.backgroundColor='var(--border)'; fu.style.backgroundColor='var(--border)';
             
@@ -1027,8 +1043,11 @@
                 tBox.innerHTML=''; for(let i=0; i<3; i++) { const d = document.createElement('div'); d.style.flex='1'; d.style.height='100%'; d.style.background=st.targetCssData[i]; tBox.appendChild(d); }
             } else {
                 tBox.style.background = st.renderedTargetCss;
-                if(st.isHardcore || (st.isComp && st.type === 'solid') || st.isMemory){ tBox.style.textShadow='0 0 8px #000'; tBox.textContent = st.type==='gradient'?'':spaces[st.spaceId].fmt(st.targetVals); document.getElementById('target-label').textContent='True Target'; }
-                else { tBox.textContent = ''; }
+                if(st.isHardcore || (st.isComp && st.type === 'solid') || st.isMemory){ 
+                    tBox.style.textShadow='0 0 8px #000'; 
+                    tBox.textContent = st.type==='gradient' ? '' : spaces[st.spaceId].fmt(st.targetVals); 
+                    document.getElementById('target-label').textContent='True Target'; 
+                } else { tBox.textContent = ''; }
             }
 
             document.getElementById('game-area').classList.remove('active'); document.getElementById('results-screen').classList.add('active');
