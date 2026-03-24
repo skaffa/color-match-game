@@ -41,7 +41,7 @@
         /* Modals & Pantheon */
         .info-modal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--card); z-index: 100; padding: 2rem; text-align: left; overflow-y: auto; border: 1px solid var(--border); }
         .info-modal h2 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; color: var(--accent); display: flex; justify-content: space-between; align-items: center; }
-        .info-modal p { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.8rem; line-height: 1.5; }
+        .info-modal p { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.8rem; line-height: 1.5; }
         .info-modal b { color: var(--text-main); }
         
         .pantheon-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; margin-bottom: 1.5rem; max-height: 200px; overflow-y: auto; align-content: flex-start; }
@@ -77,7 +77,7 @@
         .color-boxes { display: flex; gap: 2px; justify-content: center; margin: 0 0 2rem 0; }
         .illusion-frame { flex: 1; padding: 1px; background: var(--border); border-radius: 4px; transition: padding 0.3s, background-color 0.3s; }
         .illusion-frame.active-illusion { padding: 16px; }
-        .color-box { width: 100%; aspect-ratio: 1.2/1; transition: background-color 0.1s; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 0.7rem; font-weight: 600; text-align: center; letter-spacing: 0.05em; color: var(--text-main); }
+        .color-box { width: 100%; aspect-ratio: 1.2/1; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 0.7rem; font-weight: 600; text-align: center; letter-spacing: 0.05em; color: var(--text-main); overflow: hidden; border-radius: 2px; }
         .color-box-label { display: block; padding: 10px 0; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.1em; text-align: center; }
 
         /* Controls */
@@ -89,6 +89,7 @@
         .radio-label { display: inline-block; font-size: 0.55rem; text-transform: uppercase; font-weight: 600; letter-spacing: 0.1em; padding: 8px 10px; border: 1px solid var(--border); border-radius: 2px; cursor: pointer; color: var(--text-muted); transition: 0.2s; background: var(--bg); }
         .space-selector input[type="radio"] { display: none; }
         .space-selector input[type="radio"]:checked + .radio-label { background: var(--text-main); color: var(--bg); border-color: var(--text-main); }
+        .space-selector input[type="radio"]:disabled + .radio-label { opacity: 0.2; cursor: not-allowed; text-decoration: line-through; border-color: transparent; }
 
         .config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
         select { background: var(--bg); color: var(--text-main); border: 1px solid var(--border); padding: 10px; font-size: 0.7rem; appearance: none; text-align: center; outline: none; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; }
@@ -101,16 +102,18 @@
         input[type="checkbox"]:checked + .toggle-switch::after { left: 20px; background: var(--accent); }
         input[type="checkbox"] { display: none; }
 
-        /* Sliders & Gradient Tabs */
-        .grad-tabs { display: flex; gap: 4px; margin-bottom: 1.5rem; }
-        .grad-tab { flex: 1; padding: 8px; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; background: var(--bg); color: var(--text-muted); border: 1px solid var(--border); cursor: pointer; border-radius: 2px; }
-        .grad-tab.active { background: var(--text-main); color: var(--bg); border-color: var(--text-main); }
+        /* Sliders & Tabs */
+        .tabs-container { display: flex; gap: 4px; margin-bottom: 1.5rem; }
+        .ui-tab { flex: 1; padding: 8px; font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; background: var(--bg); color: var(--text-muted); border: 1px solid var(--border); cursor: pointer; border-radius: 2px; }
+        .ui-tab.active { background: var(--text-main); color: var(--bg); border-color: var(--text-main); }
         
-        .slider-group { margin-bottom: 1rem; }
+        .slider-group { margin-bottom: 1rem; position: relative; }
         .slider-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-main); }
         .slider-value { font-family: monospace; color: var(--text-muted); }
-        input[type="range"] { -webkit-appearance: none; width: 100%; height: 2px; background: var(--border); outline: none; touch-action: manipulation; }
-        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 6px; height: 18px; background: var(--accent); cursor: pointer; touch-action: manipulation;}
+        input[type="range"] { -webkit-appearance: none; width: 100%; height: 2px; background: var(--border); outline: none; touch-action: manipulation; position: relative; z-index: 2;}
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 6px; height: 18px; background: var(--accent); cursor: pointer; touch-action: manipulation; border-radius: 1px;}
+        
+        .ghost-thumb { position: absolute; width: 6px; height: 18px; background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.5); pointer-events: none; top: 15px; transform: translateX(-50%); border-radius: 1px; z-index: 1; display: none; transition: left 0.1s linear; }
 
         /* Terminal Input */
         .terminal-input-wrapper { display: flex; align-items: center; gap: 10px; border: 1px solid var(--border); background: var(--bg); padding: 12px; margin-bottom: 2rem; border-radius: 4px; }
@@ -200,17 +203,15 @@
         </div>
 
         <div class="info-modal" id="pantheon-modal">
-            <h2>The Pantheon 
-                <span style="font-size: 0.6rem; color: var(--text-muted); font-weight: normal; cursor:pointer;" onclick="togglePantheon(false)">[X]</span>
-            </h2>
-            <p style="text-transform: none; margin-bottom: 1.5rem;">A gallery of your absolute perfection. Every color you score <b>98% or higher</b> on is permanently immortalized here.</p>
+            <h2>The Pantheon <span style="font-size: 0.6rem; color: var(--text-muted); font-weight: normal; cursor:pointer;" onclick="togglePantheon(false)">[X]</span></h2>
+            <p style="text-transform: none;">Every configuration you score <b>98%+</b> on is permanently immortalized here. Click a swatch to reveal its metadata.</p>
             <div class="pantheon-grid" id="pantheon-grid"></div>
             
             <div class="pantheon-details" id="pantheon-details">
                 <div class="pd-title">Match Data</div>
                 <div class="pd-stat">Target: <span id="pd-target">-</span></div>
                 <div class="pd-stat">Output: <span id="pd-user">-</span></div>
-                <div class="pd-stat">Color Space: <span id="pd-space">-</span></div>
+                <div class="pd-stat">Game Type: <span id="pd-space">-</span></div>
                 <div class="pd-stat">Modifiers: <span id="pd-mods">-</span></div>
                 <div class="pd-stat">Date: <span id="pd-date">-</span></div>
             </div>
@@ -218,14 +219,14 @@
 
         <div class="info-modal" id="info-modal">
             <h2>Game Modes <span style="font-size: 0.6rem; color: var(--text-muted); font-weight: normal; cursor:pointer;" onclick="toggleInfo(false)">[X]</span></h2>
-            <p><b>Memory Mode:</b> Target is visible for 3 seconds, then vanishes. Recall and recreate.</p>
+            <p><b>Palette Architect:</b> Base color is locked. Create exact Triadic, Analogous, or Split-Complementary schemes.</p>
             <p><b>Gradient Matcher:</b> 2 Colors + Angle. The next dimension.</p>
+            <p><b>Ghost Replays (Duels):</b> When sharing Duel links, your slider movements are recorded and replayed to your opponent.</p>
+            <p><b>Memory Mode:</b> Target is visible for 3 seconds, then vanishes. Recall and recreate.</p>
             <p><b>Terminal Mode:</b> No UI. Type raw CSS code from memory.</p>
             <p><b>Chroma Rush:</b> Survival mode. Start with 60s. >90% adds time.</p>
             <p><b>CMYK Mode:</b> Subtractive ink mixing. Red + Green != Yellow.</p>
-            <p><b>Rivalry Links:</b> Challenge friends to beat your score on a specific color.</p>
             <p><b>Optical Illusion:</b> Triggers the Albers Effect using violently contrasting borders.</p>
-            <p><b>Complementary:</b> Find the exact mathematical opposite of the base color.</p>
         </div>
 
         <div class="info-modal" id="stats-modal">
@@ -255,7 +256,13 @@
             <div class="config-grid">
                 <select id="type-select" onchange="handleTypeChange()">
                     <option value="solid" selected>Solid Color</option>
-                    <option value="gradient">Gradient</option>
+                    <option value="gradient">Gradient Matcher</option>
+                    <option value="palette">Palette Architect</option>
+                </select>
+                <select id="palette-rule" style="display:none;" onchange="handleToggles()">
+                    <option value="analogous" selected>Analogous</option>
+                    <option value="triadic">Triadic</option>
+                    <option value="split">Split-Comp</option>
                 </select>
                 <select id="objective-select">
                     <option value="match" selected>Match Reference</option>
@@ -345,16 +352,13 @@
                 </div>
                 
                 <div id="standard-controls">
-                    <div class="grad-tabs" id="grad-tabs" style="display:none;">
-                        <button class="grad-tab active" id="tab-grad-a" onclick="switchGradTab(0)">Color A</button>
-                        <button class="grad-tab" id="tab-grad-b" onclick="switchGradTab(1)">Color B</button>
-                    </div>
+                    <div class="tabs-container" id="ui-tabs" style="display:none;"></div>
 
-                    <div class="slider-group" id="group-deg" style="display:none;"><div class="slider-header"><span>Rotation (Deg)</span><span class="slider-value" id="val-deg">180</span></div><input type="range" id="slider-deg" min="0" max="360" value="180" oninput="updateColor()"></div>
-                    <div class="slider-group" id="group-s1"><div class="slider-header"><span id="lbl-s1">CH 1</span><span class="slider-value" id="val-s1">0</span></div><input type="range" id="slider-1" oninput="updateColor()"></div>
-                    <div class="slider-group" id="group-s2"><div class="slider-header"><span id="lbl-s2">CH 2</span><span class="slider-value" id="val-s2">0</span></div><input type="range" id="slider-2" oninput="updateColor()"></div>
-                    <div class="slider-group" id="group-s3"><div class="slider-header"><span id="lbl-s3">CH 3</span><span class="slider-value" id="val-s3">0</span></div><input type="range" id="slider-3" oninput="updateColor()"></div>
-                    <div class="slider-group" id="group-s4" style="display:none;"><div class="slider-header"><span id="lbl-s4">CH 4</span><span class="slider-value" id="val-s4">0</span></div><input type="range" id="slider-4" oninput="updateColor()"></div>
+                    <div class="slider-group" id="group-deg" style="display:none;"><div class="slider-header"><span>Rotation (Deg)</span><span class="slider-value" id="val-deg">180</span></div><input type="range" id="slider-deg" min="0" max="360" value="180" oninput="updateColor()"><div class="ghost-thumb" id="g-deg"></div></div>
+                    <div class="slider-group" id="group-s1"><div class="slider-header"><span id="lbl-s1">CH 1</span><span class="slider-value" id="val-s1">0</span></div><input type="range" id="slider-1" oninput="updateColor()"><div class="ghost-thumb" id="g-1"></div></div>
+                    <div class="slider-group" id="group-s2"><div class="slider-header"><span id="lbl-s2">CH 2</span><span class="slider-value" id="val-s2">0</span></div><input type="range" id="slider-2" oninput="updateColor()"><div class="ghost-thumb" id="g-2"></div></div>
+                    <div class="slider-group" id="group-s3"><div class="slider-header"><span id="lbl-s3">CH 3</span><span class="slider-value" id="val-s3">0</span></div><input type="range" id="slider-3" oninput="updateColor()"><div class="ghost-thumb" id="g-3"></div></div>
+                    <div class="slider-group" id="group-s4" style="display:none;"><div class="slider-header"><span id="lbl-s4">CH 4</span><span class="slider-value" id="val-s4">0</span></div><input type="range" id="slider-4" oninput="updateColor()"><div class="ghost-thumb" id="g-4"></div></div>
                 </div>
                 <button class="btn-lock" onclick="lockIn()">Lock In</button>
             </div>
@@ -392,7 +396,8 @@
             duel: `<svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 21l2-2"></path></svg>`,
             gradient: `<svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="12" x2="21" y2="12"></line></svg>`,
             terminal: `<svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>`,
-            memory: `<svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`
+            memory: `<svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`,
+            palette: `<svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2.69l5.66 4.2c3.81 2.83 2.5 8.11-1.66 8.11H8c-4.16 0-5.47-5.28-1.66-8.11z"></path></svg>`
         };
 
         const spaces = {
@@ -401,24 +406,25 @@
             oklab: { s1:{lbl:'L',min:0,max:100,val:50}, s2:{lbl:'A',min:-100,max:100,val:0}, s3:{lbl:'B',min:-100,max:100,val:0}, fmt:(v)=>`oklab(${v[0]}% ${+(v[1]/100*0.4).toFixed(4)} ${+(v[2]/100*0.4).toFixed(4)})` },
             oklch: { s1:{lbl:'L',min:0,max:100,val:50}, s2:{lbl:'C',min:0,max:100,val:50}, s3:{lbl:'H',min:0,max:360,val:180}, fmt:(v)=>`oklch(${v[0]}% ${+(v[1]/100*0.4).toFixed(4)} ${+(v[2]).toFixed(4)})` },
             cmyk: { s1:{lbl:'C',min:0,max:100,val:0}, s2:{lbl:'M',min:0,max:100,val:0}, s3:{lbl:'Y',min:0,max:100,val:0}, s4:{lbl:'K',min:0,max:100,val:0}, 
-                fmt:(v)=>{
-                    let c=v[0]/100, m=v[1]/100, y=v[2]/100, k=v[3]/100;
-                    return `rgb(${Math.round(255*(1-c)*(1-k))}, ${Math.round(255*(1-m)*(1-k))}, ${Math.round(255*(1-y)*(1-k))})`;
-                }
+                fmt:(v)=>{ let c=v[0]/100, m=v[1]/100, y=v[2]/100, k=v[3]/100; return `rgb(${Math.round(255*(1-c)*(1-k))}, ${Math.round(255*(1-m)*(1-k))}, ${Math.round(255*(1-y)*(1-k))})`; }
             }
         };
 
-        const defaultCfg = { s: 'rgb', t: 30, o: 'match', p: 'solid', m: false, h: false, i: false, tm: false, mm: false };
+        const defaultCfg = { s: 'rgb', t: 30, o: 'match', p: 'solid', pr: 'analogous', m: false, h: false, i: false, tm: false, mm: false };
 
         let st = {
             isDaily:false, dailyId:null, isViewingShared:false, suppressSave:false,
             isRush:false, rushStreak:0, isDuel:false, duelData:null,
             spaceId:'rgb', timeLimit:30, timeRemaining:0, timer:null, memoryTimeout:null,
-            isComp:false, isMap:false, isHardcore:false, isIllusion:false, isGradient:false, isTerminal:false, isMemory:false,
+            isComp:false, isMap:false, isHardcore:false, isIllusion:false, isTerminal:false, isMemory:false,
+            type:'solid', palRule:'analogous', uiTab:0, finalScore:0,
             
-            baseVals:[], targetVals:[], currentVals:[], targetRgb:{r:0,g:0,b:0}, currentRgb:{r:0,g:0,b:0}, 
-            tGradA:[], tGradB:[], tDeg:180, cGradA:[], cGradB:[], cDeg:180, gradTab:0, finalScore:0,
-            renderedTargetCss: '', renderedUserCss: ''
+            targetColorData: [], userColorData: [],
+            targetCssData: [], userCssData: [],
+            userNativeData: [], gradDeg: 180,
+            renderedTargetCss: '', renderedUserCss: '',
+            
+            ghostLog: [], ghostStart: 0, ghostTimer: null, lastGhostData: null
         };
 
         const hiddenCtx = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
@@ -433,8 +439,7 @@
         let currentConfirmCallback = null;
         function toggleSettings(show) { document.getElementById('settings-modal').style.display = show ? 'block' : 'none'; }
         function triggerConfirm(msg, callback) {
-            currentConfirmCallback = callback; document.getElementById('confirm-msg').textContent = msg;
-            document.getElementById('confirm-modal').style.display = 'flex';
+            currentConfirmCallback = callback; document.getElementById('confirm-msg').textContent = msg; document.getElementById('confirm-modal').style.display = 'flex';
         }
         function closeConfirm() { document.getElementById('confirm-modal').style.display = 'none'; currentConfirmCallback = null; }
         function executeConfirm() { if(currentConfirmCallback) currentConfirmCallback(); closeConfirm(); }
@@ -451,7 +456,8 @@
             const entry = {
                 tCss, uCss, date: new Date().toLocaleDateString(),
                 cfg: {
-                    space: st.spaceId.toUpperCase(), type: st.isGradient ? 'Gradient' : 'Solid', obj: st.isComp ? 'Complementary' : 'Match',
+                    space: st.spaceId.toUpperCase(), type: st.type.charAt(0).toUpperCase() + st.type.slice(1), 
+                    obj: st.type==='palette'?st.palRule:(st.isComp ? 'Complementary' : 'Match'),
                     mods: [st.isMap?'Map':'', st.isHardcore?'Blind':'', st.isTerminal?'Terminal':'', st.isIllusion?'Illusion':'', st.isMemory?'Memory':''].filter(Boolean).join(', ') || 'None'
                 }
             };
@@ -465,7 +471,8 @@
                 grid.innerHTML = p.length === 0 ? '<div class="empty-pantheon">Achieve 98% or higher precision to immortalize colors here.</div>' : '';
                 p.forEach(entry => {
                     const el = document.createElement('div'); el.className = 'pantheon-swatch';
-                    el.style.background = entry.cfg.type === 'Gradient' ? entry.tCss : `linear-gradient(135deg, ${entry.tCss} 50%, ${entry.uCss} 50%)`;
+                    if (entry.cfg.type === 'Gradient' || entry.cfg.type === 'Palette') { el.style.background = entry.tCss; } 
+                    else { el.style.background = `linear-gradient(135deg, ${entry.tCss} 50%, ${entry.uCss} 50%)`; }
                     el.onclick = () => showPantheonDetails(entry); grid.appendChild(el);
                 });
             }
@@ -510,35 +517,55 @@
 
         // --- UI CONFIG ---
         function handleTypeChange() {
-            const isGrad = document.getElementById('type-select').value === 'gradient';
-            document.getElementById('terminal-checkbox').disabled = isGrad;
-            document.getElementById('map-checkbox').disabled = isGrad;
-            document.getElementById('hardcore-checkbox').disabled = isGrad;
-            if(isGrad) {
-                document.getElementById('terminal-checkbox').checked = false;
-                document.getElementById('map-checkbox').checked = false;
-                document.getElementById('hardcore-checkbox').checked = false;
+            const t = document.getElementById('type-select').value;
+            const isGrad = t === 'gradient'; const isPal = t === 'palette';
+            
+            document.getElementById('objective-select').style.display = isPal ? 'none' : 'block';
+            document.getElementById('palette-rule').style.display = isPal ? 'block' : 'none';
+
+            if (isPal) {
+                const cur = document.querySelector('input[name="colorSpace"]:checked').value;
+                if (cur !== 'hsl' && cur !== 'oklch') { document.querySelector('input[name="colorSpace"][value="hsl"]').checked = true; changeColorSpace(); }
+                document.querySelector('input[name="colorSpace"][value="rgb"]').disabled = true;
+                document.querySelector('input[name="colorSpace"][value="oklab"]').disabled = true;
+                document.querySelector('input[name="colorSpace"][value="cmyk"]').disabled = true;
+                
+                document.getElementById('map-checkbox').checked = false; document.getElementById('terminal-checkbox').checked = false;
+                document.getElementById('hardcore-checkbox').checked = false; document.getElementById('memory-checkbox').checked = false;
+            } else {
+                document.querySelector('input[name="colorSpace"][value="rgb"]').disabled = false;
+                document.querySelector('input[name="colorSpace"][value="oklab"]').disabled = false;
+                document.querySelector('input[name="colorSpace"][value="cmyk"]').disabled = false;
             }
+
+            document.getElementById('terminal-checkbox').disabled = isGrad || isPal;
+            document.getElementById('map-checkbox').disabled = isGrad || isPal;
+            document.getElementById('hardcore-checkbox').disabled = isGrad || isPal;
+            document.getElementById('memory-checkbox').disabled = isGrad || isPal;
+
             handleToggles();
         }
 
         function handleToggles() {
             if(st.suppressSave) return;
-            const isGrad = document.getElementById('type-select').value === 'gradient';
+            const t = document.getElementById('type-select').value;
+            const isMulti = t === 'gradient' || t === 'palette';
             const m = document.getElementById('map-checkbox').checked;
             const h = document.getElementById('hardcore-checkbox').checked;
             const tm = document.getElementById('terminal-checkbox').checked;
             const mm = document.getElementById('memory-checkbox').checked;
             
-            document.getElementById('map-checkbox').disabled = h || tm || isGrad;
-            document.getElementById('hardcore-checkbox').disabled = m || tm || mm || isGrad;
-            document.getElementById('terminal-checkbox').disabled = m || h || isGrad;
-            document.getElementById('memory-checkbox').disabled = h;
+            if(!isMulti) {
+                document.getElementById('map-checkbox').disabled = h || tm;
+                document.getElementById('hardcore-checkbox').disabled = m || tm || mm;
+                document.getElementById('terminal-checkbox').disabled = m || h;
+                document.getElementById('memory-checkbox').disabled = h;
+            }
 
-            document.getElementById('lbl-map').style.opacity = (h||tm||isGrad)?'0.3':'1';
-            document.getElementById('lbl-hardcore').style.opacity = (m||tm||mm||isGrad)?'0.3':'1';
-            document.getElementById('lbl-terminal').style.opacity = (m||h||isGrad)?'0.3':'1';
-            document.getElementById('lbl-memory').style.opacity = h?'0.3':'1';
+            document.getElementById('lbl-map').style.opacity = (h||tm||isMulti)?'0.3':'1';
+            document.getElementById('lbl-hardcore').style.opacity = (m||tm||mm||isMulti)?'0.3':'1';
+            document.getElementById('lbl-terminal').style.opacity = (m||h||isMulti)?'0.3':'1';
+            document.getElementById('lbl-memory').style.opacity = (h||isMulti)?'0.3':'1';
 
             const sel = document.getElementById('space-selector');
             sel.style.opacity = m ? '0.3' : '1'; sel.style.pointerEvents = m ? 'none' : 'auto';
@@ -548,7 +575,7 @@
         function getUIConfig() {
             return {
                 s: document.querySelector('input[name="colorSpace"]:checked').value, t: parseInt(document.getElementById('timer-select').value),
-                o: document.getElementById('objective-select').value, p: document.getElementById('type-select').value,
+                o: document.getElementById('objective-select').value, p: document.getElementById('type-select').value, pr: document.getElementById('palette-rule').value,
                 m: document.getElementById('map-checkbox').checked, h: document.getElementById('hardcore-checkbox').checked,
                 i: document.getElementById('illusion-checkbox').checked, tm: document.getElementById('terminal-checkbox').checked, mm: document.getElementById('memory-checkbox').checked
             };
@@ -557,7 +584,8 @@
         function setUIConfig(c) {
             st.suppressSave = true;
             if (document.querySelector(`input[name="colorSpace"][value="${c.s}"]`)) document.querySelector(`input[name="colorSpace"][value="${c.s}"]`).checked = true;
-            document.getElementById('timer-select').value = c.t || 30; document.getElementById('objective-select').value = c.o || 'match'; document.getElementById('type-select').value = c.p || 'solid';
+            document.getElementById('timer-select').value = c.t || 30; document.getElementById('objective-select').value = c.o || 'match'; 
+            document.getElementById('type-select').value = c.p || 'solid'; document.getElementById('palette-rule').value = c.pr || 'analogous';
             document.getElementById('map-checkbox').checked = c.m || false; document.getElementById('hardcore-checkbox').checked = c.h || false;
             document.getElementById('illusion-checkbox').checked = c.i || false; document.getElementById('terminal-checkbox').checked = c.tm || false; document.getElementById('memory-checkbox').checked = c.mm || false;
             
@@ -573,18 +601,17 @@
             const p = new URLSearchParams(window.location.search);
             if (p.has('duel') && p.has('d')) {
                 try {
-                    const data = JSON.parse(atob(p.get('d')));
-                    st.isDuel = true; st.duelData = data;
+                    const data = JSON.parse(atob(p.get('d'))); st.isDuel = true; st.duelData = data;
                     document.getElementById('duel-op-score').textContent = st.duelData.oS + '%'; document.getElementById('duel-banner').style.display = 'block';
                 } catch(e) { clearUrl(); }
                 return null;
             }
             if (!p.has('share')) return null;
-            return { s:p.get('s'), t:parseInt(p.get('t')), o:p.get('o'), p:p.get('p')||'solid', m:p.get('m')==='1', h:p.get('h')==='1', i:p.get('i')==='1', tm:p.get('tm')==='1', mm:p.get('mm')==='1' };
+            return { s:p.get('s'), t:parseInt(p.get('t')), o:p.get('o'), p:p.get('p')||'solid', pr:p.get('pr')||'analogous', m:p.get('m')==='1', h:p.get('h')==='1', i:p.get('i')==='1', tm:p.get('tm')==='1', mm:p.get('mm')==='1' };
         }
 
         function copyConfigUrl() {
-            const c = getUIConfig(); const qs = `?share=1&s=${c.s}&t=${c.t}&o=${c.o}&p=${c.p}&m=${c.m?1:0}&h=${c.h?1:0}&i=${c.i?1:0}&tm=${c.tm?1:0}&mm=${c.mm?1:0}`;
+            const c = getUIConfig(); const qs = `?share=1&s=${c.s}&t=${c.t}&o=${c.o}&p=${c.p}&pr=${c.pr}&m=${c.m?1:0}&h=${c.h?1:0}&i=${c.i?1:0}&tm=${c.tm?1:0}&mm=${c.mm?1:0}`;
             navigator.clipboard.writeText(window.location.origin + window.location.pathname + qs);
             document.getElementById('btn-copy-config').innerHTML = '<span>Copied!</span>'; setTimeout(() => document.getElementById('btn-copy-config').innerHTML = 'Copy Config', 2000);
         }
@@ -619,22 +646,23 @@
             document.getElementById('daily-challenges-list').innerHTML = '';
             
             for (let i=1; i<=3; i++) {
-                let cfg = { id:i, objective:'match', isMap:false, isHardcore:false, isIllusion:false, isGradient:false, isTerminal:false, isMemory:false };
+                let cfg = { id:i, objective:'match', type:'solid', isMap:false, isHardcore:false, isIllusion:false, isTerminal:false, isMemory:false };
                 
                 if (i === 1) { cfg.space = rng()>0.5?'rgb':'hsl'; cfg.timer = rng()>0.5?60:30; cfg.isMap = rng()>0.5; } 
                 else if (i === 2) { cfg.space = ['oklab','oklch','cmyk'][Math.floor(rng()*3)]; cfg.timer = 30; cfg.isIllusion = rng()>0.5; cfg.isMemory = rng()>0.7; } 
                 else {
                     cfg.space = spaceList[Math.floor(rng()*5)]; cfg.timer = rng()>0.5?15:30;
-                    const r = Math.floor(rng()*5);
-                    if(r===0) cfg.isHardcore=true; else if(r===1) cfg.isTerminal=true; else if(r===2) cfg.isGradient=true; else if(r===3) cfg.isMemory=true; else cfg.isIllusion=true;
+                    const r = Math.floor(rng()*6);
+                    if(r===0) cfg.isHardcore=true; else if(r===1) cfg.isTerminal=true; else if(r===2) cfg.type='gradient'; else if(r===3) {cfg.type='palette'; cfg.space='hsl';} else if(r===4) cfg.isMemory=true; else cfg.isIllusion=true;
                 }
                 
-                let dScore = (cfg.space==='rgb'?3:cfg.space==='cmyk'?4:cfg.space==='oklab'?4:2) + (cfg.timer===15?2:cfg.timer===30?1:0) - (cfg.isMap?3:0) + (cfg.isHardcore?5:0) + (cfg.isIllusion?2:0) + (cfg.isGradient?6:0) + (cfg.isTerminal?8:0) + (cfg.isMemory?4:0);
+                let dScore = (cfg.space==='rgb'?3:cfg.space==='cmyk'?4:cfg.space==='oklab'?4:2) + (cfg.timer===15?2:cfg.timer===30?1:0) - (cfg.isMap?3:0) + (cfg.isHardcore?5:0) + (cfg.isIllusion?2:0) + (cfg.type==='gradient'?6:cfg.type==='palette'?4:0) + (cfg.isTerminal?8:0) + (cfg.isMemory?4:0);
                 let dLbl = dScore<=3?'CASUAL':dScore<=6?'NORMAL':dScore<=10?'HARD':'EXTREME';
                 let dCol = dScore<=3?'#22c55e':dScore<=6?'#facc15':dScore<=10?'#f97316':'#ef4444';
                 
                 let mods = [];
-                if(cfg.isGradient) mods.push(`<span class="flag-item">${svgs.gradient} Gradient</span>`);
+                if(cfg.type==='gradient') mods.push(`<span class="flag-item">${svgs.gradient} Gradient</span>`);
+                if(cfg.type==='palette') mods.push(`<span class="flag-item">${svgs.palette} Palette</span>`);
                 if(cfg.isTerminal) mods.push(`<span class="flag-item">${svgs.terminal} Terminal</span>`);
                 if(cfg.isMap) mods.push(`<span class="flag-item">${svgs.map} Map</span>`);
                 if(cfg.isMemory) mods.push(`<span class="flag-item">${svgs.memory} Memory</span>`);
@@ -645,7 +673,7 @@
                 card.innerHTML = `<div class="daily-card-title"><span>Ch 0${cfg.id}</span><div style="display:flex; gap:8px;"><span class="diff-badge" style="color:${dCol}; border-color:${dCol};">${dLbl}</span><span>${cfg.timer}s</span></div></div>
                                   <div class="daily-card-desc"><span style="font-weight:700; color:var(--text-main); font-size:0.7rem;">${cfg.space.toUpperCase()}</span></div>
                                   ${mods.length?`<div style="display:flex;gap:10px;margin-top:6px;color:var(--text-main);">${mods.join('')}</div>`:''}`;
-                card.onclick = () => { st.isDaily=true; st.dailyChallengeId=cfg.id; st.spaceId=cfg.space; st.timeLimit=cfg.timer; st.isMap=cfg.isMap; st.isHardcore=cfg.isHardcore; st.isIllusion=cfg.isIllusion; st.isComp=false; st.isGradient=cfg.isGradient; st.isTerminal=cfg.isTerminal; st.isMemory=cfg.isMemory; setUIConfig({s:cfg.space,t:cfg.timer,o:'match',p:cfg.isGradient?'gradient':'solid',m:cfg.isMap,h:cfg.isHardcore,i:cfg.isIllusion,tm:cfg.isTerminal,mm:cfg.isMemory}); executeGameStart(); };
+                card.onclick = () => { st.isDaily=true; st.dailyChallengeId=cfg.id; st.spaceId=cfg.space; st.timeLimit=cfg.timer; st.isMap=cfg.isMap; st.isHardcore=cfg.isHardcore; st.isIllusion=cfg.isIllusion; st.isComp=false; st.type=cfg.type; st.palRule='analogous'; st.isTerminal=cfg.isTerminal; st.isMemory=cfg.isMemory; setUIConfig({s:cfg.space,t:cfg.timer,o:'match',p:cfg.type,pr:'analogous',m:cfg.isMap,h:cfg.isHardcore,i:cfg.isIllusion,tm:cfg.isTerminal,mm:cfg.isMemory}); executeGameStart(); };
                 document.getElementById('daily-challenges-list').appendChild(card);
             }
         }
@@ -656,22 +684,76 @@
             if(st.spaceId==='oklab') return [v[0],-v[1],-v[2]];
             if(st.spaceId==='cmyk') return [100-v[0],100-v[1],100-v[2],100-v[3]];
         }
+        
+        function calcPalette(baseVals, rule) {
+            const hIdx = st.spaceId === 'hsl' ? 0 : 2;
+            let c2 = [...baseVals], c3 = [...baseVals];
+            if (rule === 'analogous') { c2[hIdx] = (baseVals[hIdx] + 30) % 360; c3[hIdx] = (baseVals[hIdx] + 330) % 360; } 
+            else if (rule === 'triadic') { c2[hIdx] = (baseVals[hIdx] + 120) % 360; c3[hIdx] = (baseVals[hIdx] + 240) % 360; } 
+            else if (rule === 'split') { c2[hIdx] = (baseVals[hIdx] + 150) % 360; c3[hIdx] = (baseVals[hIdx] + 210) % 360; }
+            return [baseVals, c2, c3];
+        }
 
-        // --- 5. MAIN GAME LOOP ---
+        // --- GHOST SYSTEM ---
+        function recordGhost() {
+            if (st.isMap || st.isTerminal) return; 
+            const now = Date.now();
+            if (now - st.ghostStart < 100) return; 
+            
+            let curState = JSON.stringify({ t: st.uiTab, d: st.gradDeg, v: [1,2,3,4].map(n=>document.getElementById(`slider-${n}`).value) });
+            if (st.lastGhostData !== curState) {
+                st.ghostLog.push({ ms: now - st.ghostStart, s: curState });
+                st.lastGhostData = curState;
+            }
+        }
+
+        function playbackGhost() {
+            if (!st.isDuel || !st.duelData || !st.duelData.gL || st.duelData.gL.length === 0) return;
+            const elapsed = Date.now() - st.ghostStart;
+            
+            let activeFrame = null;
+            for (let i = 0; i < st.duelData.gL.length; i++) {
+                if (st.duelData.gL[i].ms <= elapsed) activeFrame = st.duelData.gL[i]; else break;
+            }
+            
+            if (activeFrame) {
+                const state = JSON.parse(activeFrame.s);
+                if (st.type === 'gradient' || st.type === 'palette') {
+                    const tabs = document.querySelectorAll('.ui-tab');
+                    tabs.forEach((t, i) => { t.style.boxShadow = (i === state.t) ? 'inset 0 0 10px rgba(255,255,255,0.2)' : 'none'; });
+                }
+                if (st.type === 'gradient') {
+                    const gDeg = document.getElementById('g-deg'); gDeg.style.display = 'block';
+                    gDeg.style.left = (state.d / 360) * 100 + '%';
+                }
+                
+                [1,2,3,4].forEach(n => {
+                    const sl = document.getElementById(`slider-${n}`);
+                    const ghost = document.getElementById(`g-${n}`);
+                    if (spaces[st.spaceId][`s${n}`] && state.v[n-1] !== undefined) {
+                        ghost.style.display = 'block';
+                        const min = sl.min, max = sl.max, val = state.v[n-1];
+                        ghost.style.left = ((val - min) / (max - min)) * 100 + '%';
+                    } else { ghost.style.display = 'none'; }
+                });
+            }
+        }
+
+        // --- MAIN GAME LOOP ---
         function startFreeplay() {
             st.isDaily=false; st.isRush=false; const c = getUIConfig();
-            st.spaceId=c.s; st.timeLimit=c.t; st.isComp=c.o==='complementary'; st.isMap=c.m; st.isHardcore=c.h; st.isIllusion=c.i; st.isTerminal=c.tm; st.isGradient=c.p==='gradient'; st.isMemory=c.mm;
+            st.spaceId=c.s; st.timeLimit=c.t; st.isComp=c.o==='complementary'; st.type=c.p; st.palRule=c.pr; st.isMap=c.m; st.isHardcore=c.h; st.isIllusion=c.i; st.isTerminal=c.tm; st.isMemory=c.mm;
             document.getElementById('shared-banner').style.display='none'; executeGameStart();
         }
         function startRush() {
             st.isDaily=false; st.isRush=true; st.rushStreak=0; const c = getUIConfig();
-            st.spaceId=c.s; st.timeLimit=60; st.isComp=c.o==='complementary'; st.isMap=c.m; st.isHardcore=c.h; st.isIllusion=c.i; st.isTerminal=c.tm; st.isGradient=c.p==='gradient'; st.isMemory=c.mm;
+            st.spaceId=c.s; st.timeLimit=60; st.isComp=c.o==='complementary'; st.type=c.p; st.palRule=c.pr; st.isMap=c.m; st.isHardcore=c.h; st.isIllusion=c.i; st.isTerminal=c.tm; st.isMemory=c.mm;
             document.getElementById('shared-banner').style.display='none'; executeGameStart();
         }
         function acceptDuel() {
             st.isDaily=false; st.isRush=false; 
             setUIConfig(st.duelData.c); const c = getUIConfig();
-            st.spaceId=c.s; st.timeLimit=c.t; st.isComp=c.o==='complementary'; st.isMap=c.m; st.isHardcore=c.h; st.isIllusion=c.i; st.isTerminal=c.tm; st.isGradient=c.p==='gradient'; st.isMemory=c.mm;
+            st.spaceId=c.s; st.timeLimit=c.t; st.isComp=c.o==='complementary'; st.type=c.p; st.palRule=c.pr; st.isMap=c.m; st.isHardcore=c.h; st.isIllusion=c.i; st.isTerminal=c.tm; st.isMemory=c.mm;
             document.getElementById('duel-banner').style.display='none'; executeGameStart();
         }
         function playAgain() {
@@ -681,46 +763,75 @@
         function executeGameStart() {
             if(st.timer) { clearInterval(st.timer); st.timer = null; }
             if(st.memoryTimeout) { clearTimeout(st.memoryTimeout); st.memoryTimeout = null; }
+            if(st.ghostTimer) { clearInterval(st.ghostTimer); st.ghostTimer = null; }
+            
+            document.querySelectorAll('.ghost-thumb').forEach(el => el.style.display = 'none');
+            st.ghostLog = []; st.ghostStart = Date.now();
 
             document.getElementById('setup-screen').classList.remove('active'); document.getElementById('daily-screen').classList.remove('active'); document.getElementById('results-screen').classList.remove('active');
             document.getElementById('main-color-boxes').style.display='flex'; document.getElementById('game-area').classList.add('active');
             
             document.getElementById('cheater-controls').style.display = st.isMap ? 'block' : 'none'; document.getElementById('selector-dot').style.display = st.isMap ? 'block' : 'none';
             document.getElementById('terminal-controls').style.display = st.isTerminal ? 'block' : 'none'; document.getElementById('standard-controls').style.display = (!st.isMap && !st.isTerminal) ? 'block' : 'none';
-            document.getElementById('grad-tabs').style.display = st.isGradient ? 'flex' : 'none'; document.getElementById('group-deg').style.display = st.isGradient ? 'block' : 'none';
+            
+            const tabs = document.getElementById('ui-tabs');
+            if (st.type === 'gradient') {
+                tabs.style.display = 'flex'; document.getElementById('group-deg').style.display = 'block';
+                tabs.innerHTML = `<button class="ui-tab active" id="tab-0" onclick="switchUITab(0)">Color A</button><button class="ui-tab" id="tab-1" onclick="switchUITab(1)">Color B</button>`;
+            } else if (st.type === 'palette') {
+                tabs.style.display = 'flex'; document.getElementById('group-deg').style.display = 'none';
+                tabs.innerHTML = `<button class="ui-tab" style="opacity:0.5; pointer-events:none;">Base</button><button class="ui-tab active" id="tab-1" onclick="switchUITab(1)">Color 2</button><button class="ui-tab" id="tab-2" onclick="switchUITab(2)">Color 3</button>`;
+            } else { tabs.style.display = 'none'; document.getElementById('group-deg').style.display = 'none'; }
 
             document.getElementById('frame-opponent').style.display='none'; document.getElementById('btn-challenge').style.display='none';
 
             const rb = document.getElementById('rush-badge');
             if (st.isRush) { rb.style.display='flex'; document.getElementById('rush-streak').textContent=st.rushStreak; } else { rb.style.display='none'; }
 
-            initRoundColors();
-            changeColorSpace();
+            initRoundColors(); changeColorSpace();
             
-            st.timeRemaining = st.timeLimit;
-            
-            let oTxt = st.isGradient ? "Match the Gradient" : "Match the Target";
+            let oTxt = st.type === 'gradient' ? "Match the Gradient" : st.type === 'palette' ? `Build ${st.palRule} Palette` : "Match the Target";
             if(st.isTerminal) oTxt = "Type the Code to Match";
             else if(st.isComp&&st.isHardcore) oTxt="Blind-Match Complement"; 
             else if(st.isComp) oTxt="Match Complement"; 
             else if(st.isHardcore) oTxt="Blind-Match Target";
 
             if(st.isMemory) {
-                document.getElementById('game-objective').textContent = "Memorize the Target!";
-                document.getElementById('game-objective').style.color = '#facc15';
-                
+                document.getElementById('game-objective').textContent = "Memorize the Target!"; document.getElementById('game-objective').style.color = '#facc15';
                 st.memoryTimeout = setTimeout(() => {
                     document.getElementById('game-objective').textContent = st.isComp ? "Remake Complement from Memory!" : "Remake from Memory!";
                     document.getElementById('game-objective').style.color = 'var(--accent)';
                     const tBox = document.getElementById('target-color');
-                    tBox.style.background = 'var(--bg)'; tBox.style.textShadow = 'none'; tBox.textContent = '???';
+                    if(st.type === 'palette') {
+                        tBox.innerHTML = '<div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--bg);"><span style="font-size:1.5rem;">???</span></div>';
+                    } else {
+                        tBox.style.background = 'var(--bg)'; tBox.style.textShadow = 'none'; tBox.innerHTML = '<span style="font-size:1.5rem;">???</span>';
+                    }
                 }, 3000);
-            } else {
-                document.getElementById('game-objective').style.color = 'var(--accent)';
-                document.getElementById('game-objective').textContent = oTxt;
-            }
+            } else { document.getElementById('game-objective').style.color = 'var(--accent)'; document.getElementById('game-objective').textContent = oTxt; }
 
+            st.timeRemaining = st.timeLimit;
             startTimer();
+            if (st.isDuel) st.ghostTimer = setInterval(playbackGhost, 50);
+        }
+
+        function buildFlexBoxes(containerId, count) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            for(let i=0; i<count; i++) { const box = document.createElement('div'); box.style.flex = '1'; box.style.height = '100%'; container.appendChild(box); }
+        }
+
+        function renderBoxes() {
+            const tBox = document.getElementById('target-color'); const uBox = document.getElementById('user-color');
+            if (st.type === 'palette') {
+                for(let i=0; i<3; i++) { tBox.children[i].style.background = st.targetCssData[i]; uBox.children[i].style.background = st.userCssData[i]; }
+            } else if (st.type === 'gradient') {
+                tBox.style.background = st.renderedTargetCss; uBox.style.background = st.renderedUserCss;
+            } else {
+                if (st.isHardcore && !st.isMemory) { tBox.style.background = 'var(--bg)'; tBox.textContent = st.renderedTargetCss; }
+                else { tBox.style.background = st.renderedTargetCss; }
+                uBox.style.background = st.renderedUserCss;
+            }
         }
 
         function initRoundColors() {
@@ -730,61 +841,67 @@
             if (st.isIllusion) { ft.classList.add('active-illusion'); fu.classList.add('active-illusion'); ft.style.backgroundColor = `hsl(${Math.floor(rng()*360)},100%,50%)`; fu.style.backgroundColor = `hsl(${Math.floor(rng()*360)},100%,50%)`;
             } else { ft.classList.remove('active-illusion'); fu.classList.remove('active-illusion'); ft.style.backgroundColor = 'var(--border)'; fu.style.backgroundColor = 'var(--border)'; }
 
-            const tBox = document.getElementById('target-color'); const tLbl = document.getElementById('target-label');
-            tBox.textContent = ''; tBox.style.textShadow = 'none'; tBox.style.background = 'transparent';
+            const tBox = document.getElementById('target-color'); const uBox = document.getElementById('user-color'); const tLbl = document.getElementById('target-label');
+            tBox.textContent = ''; uBox.textContent = ''; tBox.style.textShadow = 'none';
 
-            if (st.isDuel) {
-                if (st.isGradient) {
-                    st.tGradA = st.duelData.gA; st.tGradB = st.duelData.gB; st.tDeg = st.duelData.gD;
-                    st.renderedTargetCss = `linear-gradient(${st.tDeg}deg, ${c.fmt(st.tGradA)}, ${c.fmt(st.tGradB)})`;
-                    tBox.style.background = st.renderedTargetCss; tLbl.textContent = 'Duel Gradient';
-                    st.cGradA = [1,2,3,4].map(n => c[`s${n}`]?c[`s${n}`].val:0); st.cGradB = [1,2,3,4].map(n => c[`s${n}`]?c[`s${n}`].val:0); st.cDeg = 180; document.getElementById('slider-deg').value = 180; document.getElementById('val-deg').textContent = 180;
-                    switchGradTab(0); updateColor();
+            if (st.type === 'palette') {
+                buildFlexBoxes('target-color', 3); buildFlexBoxes('user-color', 3); tLbl.textContent = 'Reference Palette';
+                if (st.isDuel) {
+                    st.targetColorData = st.duelData.tC; st.targetCssData = st.duelData.tCss;
+                    st.userNativeData = [st.duelData.uBase, [1,2,3,4].map(n=>c[`s${n}`]?c[`s${n}`].val:0), [1,2,3,4].map(n=>c[`s${n}`]?c[`s${n}`].val:0)];
                 } else {
+                    const bVals = [1,2,3,4].map(n => c[`s${n}`] ? Math.floor(rng()*(c[`s${n}`].max-c[`s${n}`].min+1))+c[`s${n}`].min : 0);
+                    const palVals = calcPalette(bVals, st.palRule);
+                    st.targetCssData = palVals.map(v => c.fmt(v));
+                    st.targetColorData = st.targetCssData.map(css => getRgbFromCss(css));
+                    st.userNativeData = [bVals, [1,2,3,4].map(n=>c[`s${n}`]?c[`s${n}`].val:0), [1,2,3,4].map(n=>c[`s${n}`]?c[`s${n}`].val:0)];
+                }
+                st.userCssData = st.userNativeData.map(v => c.fmt(v));
+                st.userColorData = st.userCssData.map(css => getRgbFromCss(css));
+                st.renderedTargetCss = `linear-gradient(90deg, ${st.targetCssData.join(', ')})`;
+                st.uiTab = 1; switchUITab(1); updateColor();
+            } 
+            else if (st.type === 'gradient') {
+                tBox.style.display='flex'; uBox.style.display='flex'; tLbl.textContent = 'Reference Grad';
+                if (st.isDuel) {
+                    st.targetNativeData = st.duelData.tN; st.gradDeg = st.duelData.tD;
+                    st.renderedTargetCss = `linear-gradient(${st.gradDeg}deg, ${c.fmt(st.targetNativeData[0])}, ${c.fmt(st.targetNativeData[1])})`;
+                    st.userNativeData = [[1,2,3,4].map(n=>c[`s${n}`]?c[`s${n}`].val:0), [1,2,3,4].map(n=>c[`s${n}`]?c[`s${n}`].val:0)];
+                } else {
+                    st.targetNativeData = [
+                        [1,2,3,4].map(n => c[`s${n}`] ? Math.floor(rng()*(c[`s${n}`].max-c[`s${n}`].min+1))+c[`s${n}`].min : 0),
+                        [1,2,3,4].map(n => c[`s${n}`] ? Math.floor(rng()*(c[`s${n}`].max-c[`s${n}`].min+1))+c[`s${n}`].min : 0)
+                    ];
+                    st.gradDeg = Math.floor(rng() * 360);
+                    st.renderedTargetCss = `linear-gradient(${st.gradDeg}deg, ${c.fmt(st.targetNativeData[0])}, ${c.fmt(st.targetNativeData[1])})`;
+                    st.userNativeData = [[1,2,3,4].map(n=>c[`s${n}`]?c[`s${n}`].val:0), [1,2,3,4].map(n=>c[`s${n}`]?c[`s${n}`].val:0)];
+                }
+                st.uiTab = 0; document.getElementById('slider-deg').value = 180; document.getElementById('val-deg').textContent = 180;
+                switchUITab(0); updateColor();
+            } 
+            else { 
+                tBox.style.display='flex'; uBox.style.display='flex'; tLbl.textContent = st.isComp ? 'Base Color' : 'Reference';
+                if (st.isDuel) {
                     st.targetVals = st.duelData.tV; st.renderedTargetCss = c.fmt(st.targetVals); st.targetRgb = getRgbFromCss(st.renderedTargetCss);
-                    if(st.isHardcore) { tBox.style.background='var(--bg)'; tBox.textContent=st.renderedTargetCss; } else { tBox.style.background=st.renderedTargetCss; } tLbl.textContent = 'Duel Target';
-                    if (st.isTerminal) { document.getElementById('terminal-input').value = ''; document.getElementById('user-color').style.background = 'var(--bg)'; } 
+                    if (st.isTerminal) { document.getElementById('terminal-input').value = ''; st.renderedUserCss = 'var(--bg)'; } 
+                    else { [1,2,3,4].forEach(n => { if(c[`s${n}`]) document.getElementById(`slider-${n}`).value = c[`s${n}`].val; }); updateColor(); }
+                } else {
+                    st.baseVals = [1,2,3,4].map(n => c[`s${n}`] ? Math.floor(rng()*(c[`s${n}`].max-c[`s${n}`].min+1))+c[`s${n}`].min : 0);
+                    let tVals;
+                    if(st.isComp) {
+                        if(st.spaceId==='rgb') tVals = [255-st.baseVals[0], 255-st.baseVals[1], 255-st.baseVals[2]];
+                        else if(st.spaceId==='hsl'||st.spaceId==='oklch') tVals = [st.baseVals[0], st.baseVals[1], (st.baseVals[2]+180)%360];
+                        else if(st.spaceId==='oklab') tVals = [st.baseVals[0], -st.baseVals[1], -st.baseVals[2]];
+                        else if(st.spaceId==='cmyk') tVals = [100-st.baseVals[0], 100-st.baseVals[1], 100-st.baseVals[2], 100-st.baseVals[3]];
+                    } else { tVals = st.baseVals; }
+                    st.targetVals = tVals;
+                    st.renderedTargetCss = c.fmt(st.targetVals); st.targetRgb = getRgbFromCss(st.renderedTargetCss);
+                    
+                    if (st.isTerminal) { document.getElementById('terminal-input').value = ''; st.renderedUserCss = 'var(--bg)'; } 
                     else { [1,2,3,4].forEach(n => { if(c[`s${n}`]) document.getElementById(`slider-${n}`).value = c[`s${n}`].val; }); updateColor(); }
                 }
             }
-            else if (st.isMap) {
-                drawSpectrum(); const d = document.getElementById('spectrum-map').getContext('2d').getImageData(Math.floor(rng()*280), Math.floor(rng()*160), 1, 1).data;
-                st.targetRgb = { r:d[0], g:d[1], b:d[2] }; st.renderedTargetCss = `rgb(${d[0]},${d[1]},${d[2]})`;
-                tBox.style.background = st.renderedTargetCss; tLbl.textContent = 'Reference';
-            }
-            else if (st.isGradient) {
-                let baseA = [1,2,3,4].map(n => c[`s${n}`] ? Math.floor(rng()*(c[`s${n}`].max-c[`s${n}`].min+1))+c[`s${n}`].min : 0);
-                let baseB = [1,2,3,4].map(n => c[`s${n}`] ? Math.floor(rng()*(c[`s${n}`].max-c[`s${n}`].min+1))+c[`s${n}`].min : 0);
-                st.tGradA = st.isComp ? calcComp(baseA) : baseA; st.tGradB = st.isComp ? calcComp(baseB) : baseB; st.tDeg = Math.floor(rng() * 360);
-                st.renderedTargetCss = `linear-gradient(${st.tDeg}deg, ${c.fmt(st.tGradA)}, ${c.fmt(st.tGradB)})`;
-                
-                if (st.isHardcore) { tBox.style.background='var(--bg)'; tBox.textContent=st.isComp?`linear-gradient(${st.tDeg}deg, ${c.fmt(baseA)}, ${c.fmt(baseB)})`:st.renderedTargetCss; }
-                else { tBox.style.background = st.renderedTargetCss; }
-                tLbl.textContent = st.isComp ? 'Base Grad' : 'Reference Grad';
-
-                st.cGradA = [1,2,3,4].map(n => c[`s${n}`]?c[`s${n}`].val:0); st.cGradB = [1,2,3,4].map(n => c[`s${n}`]?c[`s${n}`].val:0);
-                st.cDeg = 180; document.getElementById('slider-deg').value = 180; document.getElementById('val-deg').textContent = 180; switchGradTab(0); updateColor();
-            } 
-            else {
-                st.baseVals = [1,2,3,4].map(n => c[`s${n}`] ? Math.floor(rng()*(c[`s${n}`].max-c[`s${n}`].min+1))+c[`s${n}`].min : 0);
-                let tVals;
-                if(st.isComp) {
-                    if(st.spaceId==='rgb') tVals = [255-st.baseVals[0], 255-st.baseVals[1], 255-st.baseVals[2]];
-                    else if(st.spaceId==='hsl'||st.spaceId==='oklch') tVals = [st.baseVals[0], st.baseVals[1], (st.baseVals[2]+180)%360];
-                    else if(st.spaceId==='oklab') tVals = [st.baseVals[0], -st.baseVals[1], -st.baseVals[2]];
-                    else if(st.spaceId==='cmyk') tVals = [100-st.baseVals[0], 100-st.baseVals[1], 100-st.baseVals[2], 100-st.baseVals[3]];
-                } else { tVals = st.baseVals; }
-                st.targetVals = tVals;
-
-                const bCss = c.fmt(st.baseVals); const tCss = c.fmt(st.targetVals);
-                st.targetRgb = getRgbFromCss(tCss); st.renderedTargetCss = tCss;
-                
-                if(st.isHardcore) { tBox.style.background='var(--bg)'; tBox.textContent=st.isComp?bCss:tCss; } else { tBox.style.background=st.isComp?bCss:tCss; }
-                tLbl.textContent = st.isComp ? 'Base Color' : 'Reference';
-                
-                if (st.isTerminal) { document.getElementById('terminal-input').value = ''; document.getElementById('user-color').style.background = 'var(--bg)'; } 
-                else { [1,2,3,4].forEach(n => { if(c[`s${n}`]) document.getElementById(`slider-${n}`).value = c[`s${n}`].val; }); updateColor(); }
-            }
+            renderBoxes();
         }
 
         function drawSpectrum() {
@@ -798,30 +915,39 @@
             const r=sMap.getBoundingClientRect(); const x=Math.max(0,Math.min(e.clientX-r.left,r.width)); const y=Math.max(0,Math.min(e.clientY-r.top,r.height));
             document.getElementById('selector-dot').style.cssText=`display:block; left:${x}px; top:${y}px;`;
             const d=sMap.getContext('2d').getImageData(x*(sMap.width/r.width),y*(sMap.height/r.height),1,1).data;
-            st.currentRgb={r:d[0],g:d[1],b:d[2]}; st.renderedUserCss = `rgb(${d[0]},${d[1]},${d[2]})`; document.getElementById('user-color').style.background = st.renderedUserCss;
+            st.currentRgb={r:d[0],g:d[1],b:d[2]}; st.renderedUserCss = `rgb(${d[0]},${d[1]},${d[2]})`; renderBoxes();
         }
         sMap.addEventListener('mousedown', handleMap); sMap.addEventListener('mousemove', e => { if(e.buttons===1) handleMap(e); });
 
-        function switchGradTab(idx) {
-            st.gradTab = idx; document.getElementById('tab-grad-a').classList.toggle('active', idx===0); document.getElementById('tab-grad-b').classList.toggle('active', idx===1);
-            const vals = idx === 0 ? st.cGradA : st.cGradB;
+        function switchUITab(idx) {
+            st.uiTab = idx;
+            document.querySelectorAll('.ui-tab').forEach((el, i) => { if(!el.hasAttribute('style')) el.classList.toggle('active', i === idx); });
+            const vals = st.userNativeData[idx];
             [1,2,3,4].forEach(n => { if(spaces[st.spaceId][`s${n}`]) { document.getElementById(`slider-${n}`).value = vals[n-1] || 0; document.getElementById(`val-s${n}`).textContent = (vals[n-1]||0).toString().padStart(3,'0'); } });
+            recordGhost();
         }
 
         function updateTerminal() {
-            const str = document.getElementById('terminal-input').value; st.renderedUserCss = str; document.getElementById('user-color').style.background = str; st.currentRgb = getRgbFromCss(str);
+            st.renderedUserCss = document.getElementById('terminal-input').value; st.currentRgb = getRgbFromCss(st.renderedUserCss); renderBoxes();
         }
 
         function updateColor() {
             if(st.isMap || st.isTerminal) return; const c=spaces[st.spaceId]; 
-            if (st.isGradient) {
-                const vals = []; [1,2,3,4].forEach(n => { if(c[`s${n}`]){ let v=parseInt(document.getElementById(`slider-${n}`).value); vals.push(v); document.getElementById(`val-s${n}`).textContent=v.toString().padStart(3,'0'); } });
-                if (st.gradTab === 0) st.cGradA = vals; else st.cGradB = vals; st.cDeg = parseInt(document.getElementById('slider-deg').value); document.getElementById('val-deg').textContent = st.cDeg.toString().padStart(3,'0');
-                if (st.cGradA.length > 0 && st.cGradB.length > 0) { st.renderedUserCss = `linear-gradient(${st.cDeg}deg, ${c.fmt(st.cGradA)}, ${c.fmt(st.cGradB)})`; document.getElementById('user-color').style.background = st.renderedUserCss; }
+            const vals = []; [1,2,3,4].forEach(n => { if(c[`s${n}`]){ let v=parseInt(document.getElementById(`slider-${n}`).value); vals.push(v); document.getElementById(`val-s${n}`).textContent=v.toString().padStart(3,'0'); } });
+            
+            if (st.type === 'palette' || st.type === 'gradient') {
+                st.userNativeData[st.uiTab] = vals;
+                if (st.type === 'gradient') {
+                    st.cDeg = parseInt(document.getElementById('slider-deg').value); document.getElementById('val-deg').textContent = st.cDeg.toString().padStart(3,'0');
+                    if (st.userNativeData[0].length && st.userNativeData[1].length) { st.renderedUserCss = `linear-gradient(${st.cDeg}deg, ${c.fmt(st.userNativeData[0])}, ${c.fmt(st.userNativeData[1])})`; }
+                } else {
+                    st.userCssData[st.uiTab] = c.fmt(vals); st.userColorData[st.uiTab] = getRgbFromCss(st.userCssData[st.uiTab]);
+                    st.renderedUserCss = `linear-gradient(90deg, ${st.userCssData.join(', ')})`;
+                }
             } else {
-                st.currentVals=[]; [1,2,3,4].forEach(n => { if(c[`s${n}`]){ let v=parseInt(document.getElementById(`slider-${n}`).value); st.currentVals.push(v); document.getElementById(`val-s${n}`).textContent=v.toString().padStart(3,'0'); } });
-                if (st.currentVals.length > 0) { st.renderedUserCss = c.fmt(st.currentVals); document.getElementById('user-color').style.background=st.renderedUserCss; st.currentRgb=getRgbFromCss(st.renderedUserCss); }
+                st.currentVals=vals; st.renderedUserCss = c.fmt(st.currentVals); st.currentRgb=getRgbFromCss(st.renderedUserCss);
             }
+            renderBoxes(); recordGhost();
         }
 
         function startTimer() {
@@ -839,11 +965,16 @@
         }
 
         function calculateScore() {
-            if (st.isGradient) {
+            if (st.type === 'palette') {
+                const s1 = calcColorScore(st.targetColorData[1], st.userColorData[1]);
+                const s2 = calcColorScore(st.targetColorData[2], st.userColorData[2]);
+                return Math.round(Math.pow((s1+s2)/2, 1.5) * 100);
+            }
+            else if (st.type === 'gradient') {
                 const c = spaces[st.spaceId];
-                const tA = getRgbFromCss(c.fmt(st.tGradA)), tB = getRgbFromCss(c.fmt(st.tGradB)); const uA = getRgbFromCss(c.fmt(st.cGradA)), uB = getRgbFromCss(c.fmt(st.cGradB));
-                const score1 = (calcColorScore(tA, uA) + calcColorScore(tB, uB)) / 2; let aDiff1 = Math.abs(st.tDeg - st.cDeg) % 360; if(aDiff1 > 180) aDiff1 = 360 - aDiff1; const final1 = score1 * (0.8 + 0.2 * (1 - aDiff1/180));
-                const score2 = (calcColorScore(tA, uB) + calcColorScore(tB, uA)) / 2; let aDiff2 = Math.abs(st.tDeg - ((st.cDeg+180)%360)) % 360; if(aDiff2 > 180) aDiff2 = 360 - aDiff2; const final2 = score2 * (0.8 + 0.2 * (1 - aDiff2/180));
+                const tA = getRgbFromCss(c.fmt(st.targetNativeData[0])), tB = getRgbFromCss(c.fmt(st.targetNativeData[1])); const uA = getRgbFromCss(c.fmt(st.userNativeData[0])), uB = getRgbFromCss(c.fmt(st.userNativeData[1]));
+                const score1 = (calcColorScore(tA, uA) + calcColorScore(tB, uB)) / 2; let aDiff1 = Math.abs(st.gradDeg - st.cDeg) % 360; if(aDiff1 > 180) aDiff1 = 360 - aDiff1; const final1 = score1 * (0.8 + 0.2 * (1 - aDiff1/180));
+                const score2 = (calcColorScore(tA, uB) + calcColorScore(tB, uA)) / 2; let aDiff2 = Math.abs(st.gradDeg - ((st.cDeg+180)%360)) % 360; if(aDiff2 > 180) aDiff2 = 360 - aDiff2; const final2 = score2 * (0.8 + 0.2 * (1 - aDiff2/180));
                 return Math.round(Math.pow(Math.max(final1, final2), 1.5) * 100);
             } else { return Math.round(Math.pow(calcColorScore(st.targetRgb, st.currentRgb), 1.5) * 100); }
         }
@@ -851,10 +982,11 @@
         function lockIn() {
             if (st.timer) { clearInterval(st.timer); st.timer = null; }
             if (st.memoryTimeout) { clearTimeout(st.memoryTimeout); st.memoryTimeout = null; }
+            if (st.ghostTimer) { clearInterval(st.ghostTimer); st.ghostTimer = null; }
 
             const score = calculateScore();
-            if (!st.isGradient) saveStats(score, st.currentRgb.r - st.targetRgb.r, st.currentRgb.g - st.targetRgb.g, st.currentRgb.b - st.targetRgb.b);
-            if (score >= 98) saveToPantheon(st.renderedTargetCss, st.renderedUserCss);
+            if (st.type === 'solid') saveStats(score, st.currentRgb.r - st.targetRgb.r, st.currentRgb.g - st.targetRgb.g, st.currentRgb.b - st.targetRgb.b);
+            if (score >= 98 && !st.isDuel) saveToPantheon(st.renderedTargetCss, st.renderedUserCss);
 
             if (st.isRush && st.timeRemaining > 0) {
                 if (score >= 90) {
@@ -866,19 +998,15 @@
         }
 
         function triggerEndScreen() {
-            if (st.timer) { clearInterval(st.timer); st.timer = null; }
-            if (st.memoryTimeout) { clearTimeout(st.memoryTimeout); st.memoryTimeout = null; }
-            
             const tBox=document.getElementById('target-color'), ft=document.getElementById('frame-target'), fu=document.getElementById('frame-user');
             ft.classList.remove('active-illusion'); fu.classList.remove('active-illusion'); ft.style.backgroundColor='var(--border)'; fu.style.backgroundColor='var(--border)';
             
-            tBox.style.background = st.renderedTargetCss;
-            if(st.isHardcore || (st.isComp && !st.isGradient) || st.isMemory){ 
-                tBox.style.textShadow='0 0 8px #000'; 
-                tBox.textContent = st.isGradient ? '' : spaces[st.spaceId].fmt(st.targetVals); 
-                document.getElementById('target-label').textContent='True Target'; 
+            if (st.type === 'palette') {
+                tBox.innerHTML=''; for(let i=0; i<3; i++) { const d = document.createElement('div'); d.style.flex='1'; d.style.height='100%'; d.style.background=st.targetCssData[i]; tBox.appendChild(d); }
             } else {
-                tBox.textContent = '';
+                tBox.style.background = st.renderedTargetCss;
+                if(st.isHardcore || (st.isComp && st.type === 'solid') || st.isMemory){ tBox.style.textShadow='0 0 8px #000'; tBox.textContent = st.type==='gradient'?'':spaces[st.spaceId].fmt(st.targetVals); document.getElementById('target-label').textContent='True Target'; }
+                else { tBox.textContent = ''; }
             }
 
             document.getElementById('game-area').classList.remove('active'); document.getElementById('results-screen').classList.add('active');
@@ -888,7 +1016,8 @@
             if(st.isRush) flags.push(`<span class="flag-item">${svgs.rush} Streak: ${st.rushStreak}</span>`);
             if(st.isDaily) flags.push(`<span class="flag-item">Daily #${st.dailyNum}</span>`);
             if(st.isDuel) flags.push(`<span class="flag-item">${svgs.duel} Duel</span>`);
-            if(st.isGradient) flags.push(`<span class="flag-item">${svgs.gradient} Gradient</span>`);
+            if(st.type==='gradient') flags.push(`<span class="flag-item">${svgs.gradient} Gradient</span>`);
+            if(st.type==='palette') flags.push(`<span class="flag-item">${svgs.palette} Palette</span>`);
             if(st.isTerminal) flags.push(`<span class="flag-item">${svgs.terminal} Terminal</span>`);
             if(st.isComp) flags.push(`<span class="flag-item">${svgs.complementary} Comp</span>`);
             if(st.isMemory) flags.push(`<span class="flag-item">${svgs.memory} Memory</span>`);
@@ -897,12 +1026,16 @@
             if(st.isIllusion) flags.push(`<span class="flag-item">${svgs.illusion} Illusion</span>`);
             document.getElementById('status-text').innerHTML = flags.join('<span class="flag-sep">|</span>');
 
-            if (!st.isDaily && !st.isRush && !st.isDuel && !st.isGradient) document.getElementById('btn-challenge').style.display='flex';
+            if (!st.isDaily && !st.isRush && !st.isDuel && !st.isTerminal && !st.isMap) document.getElementById('btn-challenge').style.display='flex';
 
             if (st.isDuel) {
                 const fo = document.getElementById('frame-opponent');
                 fo.style.display = 'block'; fo.classList.remove('active-illusion'); fo.style.backgroundColor='var(--border)';
-                const oBox = document.getElementById('op-color'); oBox.style.background = st.duelData.uC;
+                const oBox = document.getElementById('op-color'); 
+                if (st.type === 'palette') {
+                    oBox.innerHTML=''; for(let i=0; i<3; i++) { const d = document.createElement('div'); d.style.flex='1'; d.style.height='100%'; d.style.background=st.duelData.uC[i]; oBox.appendChild(d); }
+                } else { oBox.style.background = st.duelData.uC; }
+
                 document.getElementById('op-label').textContent = `Opponent (${st.duelData.oS}%)`;
                 const win = st.finalScore > st.duelData.oS;
                 document.getElementById('match-percentage').innerHTML = `${st.finalScore}% <div style="font-size:1.5rem; color:${win?'#22c55e':'#ef4444'}; margin-top:10px; font-weight:800;">${win?'VICTORY':'DEFEAT'}</div>`;
@@ -910,7 +1043,15 @@
         }
 
         function shareDuel() {
-            const data = { c: getUIConfig(), tV: st.targetVals, gA: st.tGradA, gB: st.tGradB, gD: st.tDeg, uC: st.renderedUserCss, oS: st.finalScore };
+            const data = { 
+                c: getUIConfig(), 
+                tV: st.type==='solid'?st.targetVals:null, 
+                tN: st.type==='gradient'?st.targetNativeData:null, tD: st.type==='gradient'?st.gradDeg:null,
+                tC: st.type==='palette'?st.targetColorData:null, tCss: st.type==='palette'?st.targetCssData:null, uBase: st.type==='palette'?st.userNativeData[0]:null,
+                uC: st.type==='palette'?st.userCssData:st.renderedUserCss, 
+                oS: st.finalScore,
+                gL: st.ghostLog
+            };
             const qs = `?duel=1&d=${btoa(JSON.stringify(data))}`; navigator.clipboard.writeText(window.location.origin + window.location.pathname + qs);
             document.getElementById('btn-challenge').innerHTML = '<span>Link Copied!</span>'; setTimeout(() => document.getElementById('btn-challenge').innerHTML = `${svgs.duel} <span>Challenge a Friend</span>`, 2000);
         }
@@ -918,16 +1059,16 @@
         function shareScore() {
             const getEmoji = (diff) => diff < 15 ? '🟩' : diff < 40 ? '🟨' : '🟥';
             let str = `Chroma ${st.isDaily?`Daily #${st.dailyNum}`:st.isRush?`Rush (Streak ${st.rushStreak})`:st.isDuel?'Duel':'Freeplay'} | ${st.finalScore}%\nMode: ${st.spaceId.toUpperCase()}`;
-            if(st.isGradient) str+=' 🌈'; if(st.isTerminal) str+=' ⌨️'; if(st.isMemory) str+=' 🧠'; if(st.isComp) str+=' ☯'; if(st.isHardcore) str+=' 👁'; if(st.isIllusion) str+=' 🌀'; if(st.isMap) str+=' 🗺';
-            if(!st.isGradient) { const dr=Math.abs(st.targetRgb.r-st.currentRgb.r), dg=Math.abs(st.targetRgb.g-st.currentRgb.g), db=Math.abs(st.targetRgb.b-st.currentRgb.b); str += `\n[RGB] ${getEmoji(dr)}${getEmoji(dg)}${getEmoji(db)}`; }
+            if(st.type==='gradient') str+=' 🌈'; if(st.type==='palette') str+=' 🎨'; if(st.isTerminal) str+=' ⌨️'; if(st.isMemory) str+=' 🧠'; if(st.isComp) str+=' ☯'; if(st.isHardcore) str+=' 👁'; if(st.isIllusion) str+=' 🌀'; if(st.isMap) str+=' 🗺';
+            if(st.type==='solid') { const dr=Math.abs(st.targetRgb.r-st.currentRgb.r), dg=Math.abs(st.targetRgb.g-st.currentRgb.g), db=Math.abs(st.targetRgb.b-st.currentRgb.b); str += `\n[RGB] ${getEmoji(dr)}${getEmoji(dg)}${getEmoji(db)}`; }
             navigator.clipboard.writeText(str).then(() => { const b=document.getElementById('btn-share'); const o=b.innerHTML; b.innerHTML='<span>Copied!</span>'; setTimeout(()=>b.innerHTML=o,2000); });
         }
 
         function resetGame() {
             if (st.timer) { clearInterval(st.timer); st.timer = null; }
-            if (st.memoryTimeout) { clearTimeout(st.memoryTimeout); st.memoryTimeout = null; }
+            if (st.ghostTimer) { clearInterval(st.ghostTimer); st.ghostTimer = null; }
             document.getElementById('setup-screen').classList.add('active'); document.getElementById('results-screen').classList.remove('active'); document.getElementById('main-color-boxes').style.display='none';
-            if (st.isDuel) { clearUrl(); st.isDuel=false; st.duelData=null; document.getElementById('match-percentage').innerHTML='0%'; }
+            if (st.isDuel) { clearUrl(); st.isDuel=false; st.duelData=null; document.getElementById('match-percentage').innerHTML='0%'; document.getElementById('duel-banner').style.display='none'; }
             if (st.isViewingShared) document.getElementById('shared-banner').style.display='block';
             changeColorSpace();
         }
