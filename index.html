@@ -115,7 +115,9 @@
         .color-box { width: 100%; aspect-ratio: 1.2/1; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 0.7rem; font-weight: 600; text-align: center; letter-spacing: 0.05em; color: var(--text-main); overflow: hidden; border-radius: 2px; position: relative; transition: height 0.3s; }
         .color-box-label { display: block; padding: 10px 0; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.1em; text-align: center; }
         
-        .is-hexdle .color-box { aspect-ratio: unset; height: 50px; }
+        /* Special Hexdle Frame Adjustments */
+        .game-area.is-hexdle #frame-target { flex: none; width: 100%; height: 60px; max-height: 60px; margin-bottom: 0.5rem; }
+        .game-area.is-hexdle .color-box { aspect-ratio: unset; height: 100%; }
         
         /* Special Grid UIs */
         .haystack-grid { display: grid; gap: 2px; width: 100%; aspect-ratio: 1/1; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 1.5rem; }
@@ -127,11 +129,11 @@
         .sort-block.selected { transform: scale(1.1); z-index: 10; filter: brightness(1.2); outline: 2px solid var(--accent); }
 
         /* Hexdle Board */
-        #hexdle-controls { margin-bottom: 1.5rem; }
+        #hexdle-controls { margin-bottom: 1rem; }
         .hexdle-row { display: flex; gap: 4px; margin-bottom: 4px; justify-content: center; }
-        .hexdle-cell { width: 3rem; height: 3rem; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; background: var(--bg); color: var(--text-main); border-radius: 2px; transition: 0.3s; }
-        .hexdle-keyboard { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; max-width: 280px; margin: 1rem auto 0 auto; }
-        .hexdle-key { padding: 8px 12px; border: 1px solid var(--border); border-radius: 2px; background: var(--bg); color: var(--text-main); cursor: pointer; font-family: monospace; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; flex-grow: 1; transition: 0.1s; }
+        .hexdle-cell { width: 2.5rem; height: 2.5rem; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; background: var(--bg); color: var(--text-main); border-radius: 2px; transition: 0.3s; }
+        .hexdle-keyboard { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; max-width: 280px; margin: 0.5rem auto 0 auto; }
+        .hexdle-key { padding: 6px 10px; border: 1px solid var(--border); border-radius: 2px; background: var(--bg); color: var(--text-main); cursor: pointer; font-family: monospace; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; flex-grow: 1; transition: 0.1s; display: flex; align-items: center; justify-content: center; }
         .hexdle-key:active { transform: scale(0.95); }
         .hx-green { background: #22c55e !important; color: #000 !important; border-color: #22c55e !important; }
         .hx-yellow { background: #facc15 !important; color: #000 !important; border-color: #facc15 !important; }
@@ -1174,8 +1176,8 @@
                 if (st.isDuel && st.duelData.gL && st.duelData.gL.length > 0) {
                     let absTime = 0; st.parsedGhostLog = [];
                     for (let i = 0; i < st.duelData.gL.length; i += 7) {
-                        absTime += st.duelData.gL[i];
-                        st.parsedGhostLog.push({ ms: absTime, t: st.duelData.gL[i+1], d: st.duelData.gL[i+2], v: [st.duelData.gL[i+3], st.duelData.gL[i+4], st.duelData.gL[i+5], st.duelData.gL[i+6]] });
+                        absTime += st.duelData.gL.charCodeAt(i);
+                        st.parsedGhostLog.push({ ms: absTime, t: st.duelData.gL.charCodeAt(i+1), d: st.duelData.gL.charCodeAt(i+2), v: [st.duelData.gL.charCodeAt(i+3), st.duelData.gL.charCodeAt(i+4), st.duelData.gL.charCodeAt(i+5), st.duelData.gL.charCodeAt(i+6)] });
                     }
                     st.ghostTimer = requestAnimationFrame(window.playbackGhost);
                 }
@@ -1367,6 +1369,34 @@
             st.currentRgb={r:d[0],g:d[1],b:d[2]}; st.renderedUserCss = `rgb(${d[0]},${d[1]},${d[2]})`; window.renderBoxes();
         }
         sMap.addEventListener('mousedown', window.handleMap); sMap.addEventListener('mousemove', e => { if(e.buttons===1) window.handleMap(e); });
+
+        window.generateSortGradient = function(c1, c2, steps) {
+            let arr = [];
+            for(let i=0; i<steps; i++) {
+                let r = Math.round(c1.r + (c2.r - c1.r) * (i / (steps-1)));
+                let g = Math.round(c1.g + (c2.g - c1.g) * (i / (steps-1)));
+                let b = Math.round(c1.b + (c2.b - c1.b) * (i / (steps-1)));
+                arr.push({r, g, b});
+            } return arr;
+        }
+
+        window.handleSortClick = function(idx) {
+            if (st.type !== 'sort' || !document.getElementById('game-area').classList.contains('active')) return;
+            if (st.sortSelectedIdx === -1) { st.sortSelectedIdx = idx; } 
+            else { const temp = st.sortCurrent[idx]; st.sortCurrent[idx] = st.sortCurrent[st.sortSelectedIdx]; st.sortCurrent[st.sortSelectedIdx] = temp; st.sortSelectedIdx = -1; }
+            window.renderSortGrid();
+        }
+
+        window.renderSortGrid = function() {
+            const grid = document.getElementById('sort-grid'); grid.innerHTML = '';
+            st.sortCurrent.forEach((rgb, i) => {
+                const block = document.createElement('div'); block.className = 'sort-block' + (st.sortSelectedIdx === i ? ' selected' : '');
+                block.style.background = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+                if (i !== 0 && i !== 7) { block.onclick = () => window.handleSortClick(i); } 
+                else { block.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0.3;font-size:0.6rem;">🔒</div>'; block.style.cursor = 'not-allowed'; }
+                grid.appendChild(block);
+            });
+        }
 
         window.switchUITab = function(idx) {
             st.uiTab = idx; document.querySelectorAll('.ui-tab').forEach((el, i) => { if(!el.hasAttribute('style')) el.classList.toggle('active', i === idx); });
