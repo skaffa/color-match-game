@@ -35,7 +35,7 @@
         }
         body.darkroom-active .container { animation: darkroomFlicker 6s infinite alternate; }
 
-        .container { background: var(--card); padding: 3rem; border-radius: 2px; box-shadow: 0 40px 100px rgba(0,0,0,0.8); text-align: center; max-width: 480px; width: 95%; border: 1px solid var(--border); position: relative; transition: box-shadow 0.3s; }
+        .container { background: var(--card); padding: 2rem 1.5rem; border-radius: 2px; box-shadow: 0 40px 100px rgba(0,0,0,0.8); text-align: center; max-width: 480px; width: 95%; border: 1px solid var(--border); position: relative; transition: box-shadow 0.3s; }
         
         h1 { font-size: 0.85rem; font-weight: 400; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 0.5em; color: var(--text-muted); display: flex; justify-content: center; align-items: center; gap: 10px; }
         
@@ -69,7 +69,6 @@
         .info-modal h3 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-main); margin: 1.5rem 0 0.8rem 0; border-bottom: 1px solid var(--border); padding-bottom: 4px; }
         .info-modal b { color: var(--text-main); transition: color 0.3s; }
         
-        /* Highlight Rules inside Info */
         .info-modal p { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 0.8rem; line-height: 1.5; transition: 0.3s; border-left: 2px solid transparent; padding-left: 6px; margin-left: -8px; }
         .info-modal p.highlight { color: var(--text-main); border-left-color: var(--accent); background: rgba(255, 255, 255, 0.05); padding: 8px; border-radius: 0 4px 4px 0; }
         .info-modal p.highlight b { color: var(--accent); }
@@ -88,7 +87,7 @@
 
         /* Settings / Confirm Modals */
         .btn-danger { border-color: #ef4444; color: #ef4444; width: 100%; margin-bottom: 8px; }
-        .btn-danger:hover { background: #ef4444; color: var(--bg) !important; border-color: #ef4444 !important; }
+        .btn-danger:hover { background: #ef4444 !important; color: var(--bg) !important; border-color: #ef4444 !important; }
         #confirm-modal { display: none; align-items: center; justify-content: center; background: rgba(10,10,12,0.95); z-index: 200; }
         .confirm-box { background: var(--card); padding: 2rem; border: 1px solid #ef4444; border-radius: 4px; text-align: center; max-width: 320px; width: 90%; }
         
@@ -109,30 +108,27 @@
         .timer { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.1em; }
         
         /* Color Boxes */
-        .color-boxes { display: flex; gap: 2px; justify-content: center; margin: 0 0 2rem 0; }
+        .color-boxes { display: flex; gap: 2px; justify-content: center; margin: 0 0 1.5rem 0; }
         .illusion-frame { flex: 1; padding: 1px; background: var(--border); border-radius: 4px; transition: padding 0.3s, background-color 0.3s; }
         .illusion-frame.active-illusion { padding: 16px; }
         .color-box { width: 100%; aspect-ratio: 1.2/1; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 0.7rem; font-weight: 600; text-align: center; letter-spacing: 0.05em; color: var(--text-main); overflow: hidden; border-radius: 2px; position: relative; }
         .color-box-label { display: block; padding: 10px 0; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.1em; text-align: center; }
         
         /* Special Grid UIs */
-        .haystack-grid { display: grid; gap: 2px; width: 100%; aspect-ratio: 1/1; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 2rem; }
+        .haystack-grid { display: grid; gap: 2px; width: 100%; aspect-ratio: 1/1; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 1.5rem; }
         .haystack-cell { cursor: pointer; transition: opacity 0.1s; }
         .haystack-cell:active { opacity: 0.7; }
         
-        .sort-container { display: flex; width: 100%; height: 80px; gap: 2px; margin-bottom: 2rem; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+        .sort-container { display: flex; width: 100%; height: 80px; gap: 2px; margin-bottom: 1.5rem; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
         .sort-block { flex: 1; height: 100%; cursor: pointer; transition: transform 0.2s, filter 0.2s; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2); }
         .sort-block.selected { transform: scale(1.1); z-index: 10; filter: brightness(1.2); outline: 2px solid var(--accent); }
-        
-        .chromakey-frame { display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 2/1; border-radius: 4px; border: 1px solid var(--border); margin-bottom: 2rem; position: relative; overflow: hidden; background: repeating-conic-gradient(from 45deg, var(--target) 0deg 90deg, var(--bg) 90deg 180deg); background-size: 60px 60px; }
-        .chromakey-hole { width: 25%; aspect-ratio: 1/1; border-radius: 50%; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); transition: background-color 0.1s; }
 
         /* Hexdle Board */
         #hexdle-controls { margin-bottom: 1.5rem; }
-        .hexdle-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-bottom: 4px; justify-content: center; }
-        .hexdle-cell { aspect-ratio: 1/1; max-width: 40px; max-height: 40px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 1rem; font-weight: bold; text-transform: uppercase; background: var(--bg); color: var(--text-main); border-radius: 2px; transition: 0.3s; margin: 0 auto; width: 100%; }
+        .hexdle-row { display: flex; gap: 6px; margin-bottom: 6px; justify-content: center; }
+        .hexdle-cell { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; background: var(--bg); color: var(--text-main); border-radius: 2px; transition: 0.3s; }
         .hexdle-keyboard { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; max-width: 280px; margin: 1rem auto 0 auto; }
-        .hexdle-key { padding: 6px 10px; border: 1px solid var(--border); border-radius: 2px; background: var(--bg); color: var(--text-main); cursor: pointer; font-family: monospace; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; flex-grow: 1; transition: 0.1s; }
+        .hexdle-key { padding: 8px 12px; border: 1px solid var(--border); border-radius: 2px; background: var(--bg); color: var(--text-main); cursor: pointer; font-family: monospace; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; flex-grow: 1; transition: 0.1s; }
         .hexdle-key:active { transform: scale(0.95); }
         .hx-green { background: #22c55e !important; color: #000 !important; border-color: #22c55e !important; }
         .hx-yellow { background: #facc15 !important; color: #000 !important; border-color: #facc15 !important; }
@@ -308,7 +304,7 @@
             <p data-rule="type-sort"><b>Color Sort (Unscramble):</b> The sliders vanish. Tap the scrambled blocks to swap them and rebuild the perfect mathematical gradient.</p>
             <p data-rule="type-hexdle"><b>Hex-dle (Decoder):</b> 6 tries to guess the exact 6-character Hex Code (Wordle rules).</p>
             <p data-rule="type-haystack"><b>Haystack Acuity:</b> Grid vision test. Find the odd one out.</p>
-            <p data-rule="type-telephone"><b>Color Telephone:</b> 10 rounds of Genetic Drift. Your output becomes the next round's target.</p>
+            <p data-rule="type-telephone"><b>Color Telephone:</b> Genetic Drift. Your output becomes the next round's target.</p>
             <p data-rule="type-midpoint"><b>The Mixer (Midpoint):</b> Find the exact mathematical 50% midpoint between Color A and Color B.</p>
             <p data-rule="type-gradient"><b>Gradient Matcher:</b> 2 Colors + Angle. The next dimension of matching.</p>
             <p data-rule="type-palette"><b>Palette Architect:</b> Base color is locked. Create exact harmonious schemes.</p>
@@ -378,6 +374,11 @@
                     <option value="analogous" selected>Analogous</option>
                     <option value="triadic">Triadic</option>
                     <option value="split">Split-Comp</option>
+                </select>
+                <select id="telephone-rounds" style="display:none;" onchange="window.handleToggles()">
+                    <option value="5">5 ROUNDS</option>
+                    <option value="10" selected>10 ROUNDS</option>
+                    <option value="20">20 ROUNDS</option>
                 </select>
                 <select id="objective-select">
                     <option value="match" selected>Match Reference</option>
@@ -615,6 +616,12 @@
             darkroom: `<svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"></path></svg>`
         };
 
+        const typeNames = {
+            solid: "Solid Color", luminance: "Luminance Match", hexdle: "Hex-dle", haystack: "Haystack",
+            sort: "Color Sort", telephone: "Telephone", midpoint: "Midpoint", gradient: "Gradient Matcher",
+            palette: "Palette", studio: "Studio Mode"
+        };
+
         const spaces = {
             rgb: { s1:{lbl:'R',min:0,max:255,val:128}, s2:{lbl:'G',min:0,max:255,val:128}, s3:{lbl:'B',min:0,max:255,val:128}, fmt:(v)=>`#${v[0].toString(16).padStart(2,'0')}${v[1].toString(16).padStart(2,'0')}${v[2].toString(16).padStart(2,'0')}`.toUpperCase() },
             hsl: { s1:{lbl:'H',min:0,max:360,val:180}, s2:{lbl:'S',min:0,max:100,val:50}, s3:{lbl:'L',min:0,max:100,val:50}, fmt:(v)=>`hsl(${v[0]}, ${v[1]}%, ${v[2]}%)` },
@@ -625,7 +632,7 @@
             }
         };
 
-        const defaultCfg = { s: 'rgb', t: 30, o: 'match', p: 'solid', pr: 'analogous', v: 'normal', m: false, h: false, i: false, tm: false, mm: false, dk: false };
+        const defaultCfg = { s: 'rgb', t: 30, o: 'match', p: 'solid', pr: 'analogous', v: 'normal', m: false, h: false, i: false, tm: false, mm: false, dk: false, tr: 10 };
 
         let st = {
             isDaily:false, dailyId:null, isViewingShared:false, suppressSave:false,
@@ -640,7 +647,7 @@
             parsedGhostLog: [], ghostStart: 0, ghostTimer: null, lastGhostData: null, lastGhostTime: 0,
             haystackLevel: 0, haystackCorrect: 0,
             
-            teleRound: 1, teleHistory: [],
+            teleRound: 1, teleMax: 10, teleHistory: [],
             hexTarget: "", hexGuesses: [], hexCurrentGuess: "",
             
             sortTarget: [], sortCurrent: [], sortSelectedIdx: -1
@@ -698,6 +705,7 @@
             };
             p.unshift(entry); localStorage.setItem('chroma_pantheon_v2', JSON.stringify(p));
         }
+        
         window.togglePantheon = function(show) {
             const m = document.getElementById('pantheon-modal');
             if (show) {
@@ -757,6 +765,7 @@
             
             document.getElementById('objective-select').style.display = (isPal || isStud || isHay || isHex || isTele || isMid || isSort || isLum) ? 'none' : 'block';
             document.getElementById('palette-rule').style.display = isPal ? 'block' : 'none';
+            document.getElementById('telephone-rounds').style.display = isTele ? 'block' : 'none';
             document.getElementById('timer-select').disabled = isStud || isHex;
 
             if (isPal) {
@@ -770,14 +779,6 @@
                 document.querySelector('input[name="colorSpace"][value="rgb"]').disabled = false; document.querySelector('input[name="colorSpace"][value="hsl"]').disabled = false; document.querySelector('input[name="colorSpace"][value="oklab"]').disabled = false; document.querySelector('input[name="colorSpace"][value="oklch"]').disabled = false; document.querySelector('input[name="colorSpace"][value="cmyk"]').disabled = false;
             }
 
-            if (isStud || isHay || isHex || isMid || isTele || isSort) {
-                document.getElementById('terminal-checkbox').checked = false; document.getElementById('map-checkbox').checked = false;
-            }
-            if (isStud) {
-                document.getElementById('hardcore-checkbox').checked = false; document.getElementById('memory-checkbox').checked = false;
-                document.getElementById('illusion-checkbox').checked = false; document.getElementById('darkroom-checkbox').checked = false;
-            }
-
             window.handleToggles();
         }
 
@@ -785,35 +786,44 @@
             if(st.suppressSave) return;
             const t = document.getElementById('type-select').value;
             const isMulti = t === 'gradient' || t === 'palette'; const isStud = t === 'studio'; const isHay = t === 'haystack'; const isHex = t === 'hexdle'; const isTele = t === 'telephone'; const isMid = t === 'midpoint'; const isSort = t === 'sort'; const isLum = t === 'luminance';
-            const m = document.getElementById('map-checkbox').checked; const h = document.getElementById('hardcore-checkbox').checked; const tm = document.getElementById('terminal-checkbox').checked; const mm = document.getElementById('memory-checkbox').checked;
             
-            if(!isMulti && !isStud && !isHay && !isHex && !isTele && !isMid && !isSort && !isLum) {
-                document.getElementById('map-checkbox').disabled = h || tm || document.getElementById('objective-select').value === 'wcag';
-                document.getElementById('hardcore-checkbox').disabled = m || tm || mm;
-                document.getElementById('terminal-checkbox').disabled = m || h;
-                document.getElementById('memory-checkbox').disabled = h;
-                document.getElementById('objective-select').options[2].disabled = m || tm || h;
-            } else {
-                document.getElementById('map-checkbox').disabled = true; document.getElementById('terminal-checkbox').disabled = true;
-                if(isHex || isSort || isStud) { document.getElementById('hardcore-checkbox').disabled = true; document.getElementById('memory-checkbox').disabled = true; }
-            }
+            const mapChk = document.getElementById('map-checkbox');
+            const hcChk = document.getElementById('hardcore-checkbox');
+            const termChk = document.getElementById('terminal-checkbox');
+            const memChk = document.getElementById('memory-checkbox');
+            const illChk = document.getElementById('illusion-checkbox');
+            const darkChk = document.getElementById('darkroom-checkbox');
+            const objSel = document.getElementById('objective-select');
+            
+            const noSliders = isHay || isHex || isSort || isStud;
+            const noTarget = isStud;
+            const complex = isMulti || isMid || isTele || isLum;
 
-            document.getElementById('lbl-map').style.opacity = document.getElementById('map-checkbox').disabled?'0.3':'1';
-            document.getElementById('lbl-hardcore').style.opacity = document.getElementById('hardcore-checkbox').disabled?'0.3':'1';
-            document.getElementById('lbl-terminal').style.opacity = document.getElementById('terminal-checkbox').disabled?'0.3':'1';
-            document.getElementById('lbl-memory').style.opacity = document.getElementById('memory-checkbox').disabled?'0.3':'1';
-            document.getElementById('lbl-illusion').style.opacity = (isStud || isHay || isHex || isSort)?'0.3':'1'; document.getElementById('illusion-checkbox').disabled = isStud || isHay || isHex || isSort;
-            document.getElementById('lbl-darkroom').style.opacity = isStud?'0.3':'1'; document.getElementById('darkroom-checkbox').disabled = isStud;
+            mapChk.disabled = noSliders || complex || objSel.value === 'wcag' || hcChk.checked || termChk.checked;
+            hcChk.disabled = noTarget || noSliders || isLum || isTele || mapChk.checked || termChk.checked || memChk.checked;
+            termChk.disabled = noSliders || complex || mapChk.checked || hcChk.checked;
+            memChk.disabled = noTarget || noSliders || hcChk.checked || isLum;
+            illChk.disabled = isStud || isHay || isHex || isSort;
+            darkChk.disabled = isStud;
+            
+            objSel.options[2].disabled = mapChk.checked || termChk.checked || hcChk.checked;
+
+            document.getElementById('lbl-map').style.opacity = mapChk.disabled?'0.3':'1';
+            document.getElementById('lbl-hardcore').style.opacity = hcChk.disabled?'0.3':'1';
+            document.getElementById('lbl-terminal').style.opacity = termChk.disabled?'0.3':'1';
+            document.getElementById('lbl-memory').style.opacity = memChk.disabled?'0.3':'1';
+            document.getElementById('lbl-illusion').style.opacity = illChk.disabled?'0.3':'1'; 
+            document.getElementById('lbl-darkroom').style.opacity = darkChk.disabled?'0.3':'1'; 
 
             const sel = document.getElementById('space-selector');
-            sel.style.opacity = (m || isHay || isHex || isSort) ? '0.3' : '1'; sel.style.pointerEvents = (m || isHay || isHex || isSort) ? 'none' : 'auto';
+            sel.style.opacity = (mapChk.checked || isHay || isHex || isSort) ? '0.3' : '1'; sel.style.pointerEvents = (mapChk.checked || isHay || isHex || isSort) ? 'none' : 'auto';
             window.saveLocal();
         }
 
         window.getUIConfig = function() {
             return {
                 s: document.querySelector('input[name="colorSpace"]:checked').value, t: parseInt(document.getElementById('timer-select').value),
-                o: document.getElementById('objective-select').value, p: document.getElementById('type-select').value, pr: document.getElementById('palette-rule').value, v: document.getElementById('vision-select').value,
+                o: document.getElementById('objective-select').value, p: document.getElementById('type-select').value, pr: document.getElementById('palette-rule').value, v: document.getElementById('vision-select').value, tr: parseInt(document.getElementById('telephone-rounds').value),
                 m: document.getElementById('map-checkbox').checked, h: document.getElementById('hardcore-checkbox').checked, i: document.getElementById('illusion-checkbox').checked, tm: document.getElementById('terminal-checkbox').checked, mm: document.getElementById('memory-checkbox').checked, dk: document.getElementById('darkroom-checkbox').checked
             };
         }
@@ -821,7 +831,7 @@
         window.setUIConfig = function(c) {
             st.suppressSave = true;
             if (document.querySelector(`input[name="colorSpace"][value="${c.s}"]`)) document.querySelector(`input[name="colorSpace"][value="${c.s}"]`).checked = true;
-            document.getElementById('timer-select').value = c.t || 30; document.getElementById('objective-select').value = c.o || 'match'; document.getElementById('type-select').value = c.p || 'solid'; document.getElementById('palette-rule').value = c.pr || 'analogous'; document.getElementById('vision-select').value = c.v || 'normal';
+            document.getElementById('timer-select').value = c.t || 30; document.getElementById('objective-select').value = c.o || 'match'; document.getElementById('type-select').value = c.p || 'solid'; document.getElementById('palette-rule').value = c.pr || 'analogous'; document.getElementById('vision-select').value = c.v || 'normal'; document.getElementById('telephone-rounds').value = c.tr || 10;
             document.getElementById('map-checkbox').checked = c.m || false; document.getElementById('hardcore-checkbox').checked = c.h || false; document.getElementById('illusion-checkbox').checked = c.i || false; document.getElementById('terminal-checkbox').checked = c.tm || false; document.getElementById('memory-checkbox').checked = c.mm || false; document.getElementById('darkroom-checkbox').checked = c.dk || false;
             st.suppressSave = false; window.handleVision(); window.handleTypeChange(); window.changeColorSpace();
         }
@@ -831,7 +841,7 @@
         window.clearUrl = function() { window.history.replaceState({}, document.title, window.location.pathname); }
 
         window.copyConfigUrl = function() {
-            const c = window.getUIConfig(); const qs = `?share=1&s=${c.s}&t=${c.t}&o=${c.o}&p=${c.p}&pr=${c.pr}&v=${c.v}&m=${c.m?1:0}&h=${c.h?1:0}&i=${c.i?1:0}&tm=${c.tm?1:0}&mm=${c.mm?1:0}&dk=${c.dk?1:0}`;
+            const c = window.getUIConfig(); const qs = `?share=1&s=${c.s}&t=${c.t}&o=${c.o}&p=${c.p}&pr=${c.pr}&v=${c.v}&tr=${c.tr}&m=${c.m?1:0}&h=${c.h?1:0}&i=${c.i?1:0}&tm=${c.tm?1:0}&mm=${c.mm?1:0}&dk=${c.dk?1:0}`;
             navigator.clipboard.writeText(window.location.origin + window.location.pathname + qs);
             document.getElementById('btn-copy-config').innerHTML = '<span>Copied!</span>'; setTimeout(() => document.getElementById('btn-copy-config').innerHTML = 'Copy Config', 2000);
         }
@@ -872,8 +882,8 @@
                 else if (i === 2) { cfg.space = ['oklab','oklch','cmyk'][Math.floor(rng()*3)]; cfg.timer = 30; cfg.isIllusion = rng()>0.5; cfg.isMemory = rng()>0.7; } 
                 else if (i === 3) {
                     cfg.space = spaceList[Math.floor(rng()*5)]; cfg.timer = rng()>0.5?15:30;
-                    const r = Math.floor(rng()*11);
-                    if(r===0) cfg.isHardcore=true; else if(r===1) cfg.isTerminal=true; else if(r===2) cfg.type='gradient'; else if(r===3) {cfg.type='palette'; cfg.space='hsl';} else if(r===4) cfg.isMemory=true; else if (r===5) cfg.objective='wcag'; else if (r===6) {cfg.type='haystack'; cfg.space='rgb';} else if (r===7) {cfg.type='hexdle'; cfg.space='rgb';} else if (r===8) {cfg.type='sort'; cfg.space='rgb';} else if (r===9) {cfg.type='luminance';} else { cfg.vision = ['protanopia','deuteranopia','tritanopia'][Math.floor(rng()*3)]; cfg.isHardcore = true; }
+                    const r = Math.floor(rng()*10);
+                    if(r===0) cfg.isHardcore=true; else if(r===1) cfg.isTerminal=true; else if(r===2) cfg.type='gradient'; else if(r===3) {cfg.type='palette'; cfg.space='hsl';} else if(r===4) cfg.isMemory=true; else if (r===5) cfg.objective='wcag'; else if (r===6) {cfg.type='haystack'; cfg.space='rgb';} else if (r===7) {cfg.type='hexdle'; cfg.space='rgb';} else if (r===8) {cfg.type='sort'; cfg.space='rgb';} else if (r===9) {cfg.type='luminance';} 
                     if(rng() > 0.8) cfg.isDarkroom = true;
                 } else if (i === 4) { cfg.space = 'rgb'; cfg.timer = 60; cfg.isRush = true; }
                 
@@ -928,9 +938,13 @@
 
         // --- GHOST SYSTEM (NUCLEAR COMPRESSION) ---
         window.recordGhost = function() {
-            if (st.isMap || st.isTerminal || st.type === 'studio' || st.type === 'haystack' || st.type === 'hexdle' || st.type === 'sort') return; 
+            const mapDisabled = document.getElementById('map-checkbox').disabled || !document.getElementById('map-checkbox').checked;
+            const termDisabled = document.getElementById('terminal-checkbox').disabled || !document.getElementById('terminal-checkbox').checked;
+            
+            if (!mapDisabled || !termDisabled || st.type === 'studio' || st.type === 'haystack' || st.type === 'hexdle' || st.type === 'sort') return; 
+            
             const now = Date.now(); const delta = now - st.lastGhostTime;
-            if (delta < 200 && st.parsedGhostLog.length > 0) return; 
+            if (delta < 250 && st.parsedGhostLog.length > 0) return; // 4fps max for extreme compression
             
             const t = st.uiTab; const d = st.gradDeg; 
             const v = [1,2,3,4].map(n => document.getElementById(`slider-${n}`) ? parseInt(document.getElementById(`slider-${n}`).value) || 0 : 0);
@@ -1061,13 +1075,26 @@
             document.querySelectorAll('.ghost-thumb').forEach(el => el.style.display = 'none');
             st.parsedGhostLog = []; st.ghostStart = Date.now(); st.lastGhostTime = st.ghostStart;
             
-            if(st.type !== 'telephone' || st.teleRound === 1) { st.teleRound = 1; st.teleHistory = []; }
+            if(st.type !== 'telephone' || st.teleRound === 1) { 
+                st.teleRound = 1; st.teleHistory = []; 
+                st.teleMax = parseInt(document.getElementById('telephone-rounds').value) || 10;
+            }
+
             if(!st.isDaily && !st.isDuel && !st.isRush) st.gameSeed = Math.floor(Math.random() * 1000000);
 
             document.getElementById('setup-screen').classList.remove('active'); document.getElementById('daily-screen').classList.remove('active'); document.getElementById('results-screen').classList.remove('active');
             document.getElementById('game-area').classList.add('active');
             
             if (st.isDarkroom) document.body.classList.add('darkroom-active'); else document.body.classList.remove('darkroom-active');
+
+            // Force dynamic modifiers check via disabled attributes
+            st.isMap = document.getElementById('map-checkbox').checked && !document.getElementById('map-checkbox').disabled;
+            st.isHardcore = document.getElementById('hardcore-checkbox').checked && !document.getElementById('hardcore-checkbox').disabled;
+            st.isTerminal = document.getElementById('terminal-checkbox').checked && !document.getElementById('terminal-checkbox').disabled;
+            st.isMemory = document.getElementById('memory-checkbox').checked && !document.getElementById('memory-checkbox').disabled;
+
+            if (st.type === 'telephone') { document.querySelectorAll('.slider-value').forEach(el => el.style.visibility = 'hidden'); } 
+            else { document.querySelectorAll('.slider-value').forEach(el => el.style.visibility = 'visible'); }
 
             const mainBoxes = document.getElementById('main-color-boxes'); const hsGrid = document.getElementById('haystack-grid'); const controls = document.getElementById('game-controls');
             const stdControls = document.getElementById('standard-controls'); const hexControls = document.getElementById('hexdle-controls'); const btnLock = document.getElementById('btn-lock');
@@ -1111,7 +1138,7 @@
             if (st.type === 'haystack') { window.initHaystack(); } else if (st.type === 'hexdle') { window.initHexdle(); } else { window.initRoundColors(); window.changeColorSpace(); }
             
             if (st.type !== 'studio') {
-                let oTxt = st.type === 'haystack' ? "Find the Odd Color" : st.type === 'hexdle' ? "Decode the Hex" : st.type === 'sort' ? "Unscramble Gradient" : st.type === 'gradient' ? "Match the Gradient" : st.type === 'palette' ? `Build ${st.palRule} Palette` : st.type === 'midpoint' ? "Find the Midpoint" : st.type === 'luminance' ? "Match the Brightness" : st.type === 'telephone' ? `Drift: Round ${st.teleRound}/10` : st.isWcag ? "Pass WCAG Contrast" : "Match the Target";
+                let oTxt = st.type === 'haystack' ? "Find the Odd Color" : st.type === 'hexdle' ? "Decode the Hex" : st.type === 'sort' ? "Unscramble Gradient" : st.type === 'gradient' ? "Match the Gradient" : st.type === 'palette' ? `Build ${st.palRule} Palette` : st.type === 'midpoint' ? "Find the Midpoint" : st.type === 'luminance' ? "Match the Brightness" : st.type === 'telephone' ? `Drift: Round ${st.teleRound}/${st.teleMax}` : st.isWcag ? "Pass WCAG Contrast" : "Match the Target";
                 if(st.isTerminal && st.type !== 'telephone') oTxt = "Type the Code to Match"; else if(st.isComp&&st.isHardcore) oTxt="Blind-Match Complement"; else if(st.isComp) oTxt="Match Complement"; else if(st.isHardcore) oTxt="Blind-Match Target";
 
                 if(st.isMemory && st.type !== 'haystack' && st.type !== 'hexdle' && st.type !== 'sort') {
@@ -1141,7 +1168,7 @@
             const gridEl = document.getElementById('haystack-grid');
             
             let size = Math.min(10, 2 + Math.floor(st.haystackLevel / 3));
-            let diff = Math.max(8, 40 - (st.haystackLevel * 2)); 
+            let diff = Math.max(14, 50 - (st.haystackLevel * 2.5)); 
             
             gridEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`; gridEl.style.gridTemplateRows = `repeat(${size}, 1fr)`;
             gridEl.innerHTML = '';
@@ -1197,8 +1224,10 @@
                 } else if (st.type === 'gradient') { uBox.style.background = st.renderedUserCss;
                 } else { uBox.style.background = st.renderedUserCss; }
                 
-                if (st.type === 'studio') { document.getElementById('user-label').innerHTML = `<span style="user-select:all; cursor:text; color:var(--text-muted);">${st.renderedUserCss}</span>`; }
-                else { document.getElementById('user-label').textContent = 'Output'; }
+                if (st.type === 'studio' || st.type === 'telephone') { 
+                    const innerTxt = st.type === 'telephone' ? '' : st.renderedUserCss;
+                    document.getElementById('user-label').innerHTML = `<span style="user-select:all; cursor:text; color:var(--text-muted);">${innerTxt}</span>`; 
+                } else { document.getElementById('user-label').textContent = 'Output'; }
             }
         }
 
@@ -1290,10 +1319,11 @@
                         st.targetRgb = {...st.currentRgb}; st.renderedTargetCss = `rgb(${st.targetRgb.r}, ${st.targetRgb.g}, ${st.targetRgb.b})`; window.randomizeSliders();
                     } else if (st.type === 'telephone' && st.isDuel) {
                         st.targetVals = st.duelData.tV; st.renderedTargetCss = c.fmt(st.targetVals); st.targetRgb = window.getRgbFromCss(st.renderedTargetCss);
-                        st.teleHistory.push({...st.targetRgb}); [1,2,3,4].forEach(n => { if(c[`s${n}`]) document.getElementById(`slider-${n}`).value = c[`s${n}`].val; }); window.updateColor();
+                        if(st.teleRound === 1) { st.teleHistory = [{...st.targetRgb}]; }
+                        [1,2,3,4].forEach(n => { if(c[`s${n}`]) document.getElementById(`slider-${n}`).value = c[`s${n}`].val; }); window.updateColor();
                     } else {
                         st.baseVals = bVals; st.targetVals = tVals; st.renderedTargetCss = tCss;
-                        if(st.type === 'telephone') st.teleHistory.push({...st.targetRgb});
+                        if(st.type === 'telephone' && st.teleRound === 1) { st.teleHistory = [{...st.targetRgb}]; }
                         if (st.isTerminal) { document.getElementById('terminal-input').value = ''; st.renderedUserCss = 'var(--bg)'; } 
                         else { [1,2,3,4].forEach(n => { if(c[`s${n}`]) document.getElementById(`slider-${n}`).value = c[`s${n}`].val; }); window.updateColor(); }
                     }
@@ -1402,9 +1432,9 @@
                 const ex = document.getElementById('export-modal'); document.getElementById('export-textarea').value = window.buildCodeExport();
                 ex.style.display = 'block'; return;
             }
-            if (st.type === 'telephone' && st.teleRound < 10 && st.timeRemaining > 0) {
+            if (st.type === 'telephone' && st.teleRound < st.teleMax && st.timeRemaining > 0) {
                 if (st.timer) clearInterval(st.timer);
-                st.teleHistory.push({...st.currentRgb}); st.teleRound++; document.getElementById('game-objective').textContent = `Drift: Round ${st.teleRound}/10`;
+                st.teleHistory.push({...st.currentRgb}); st.teleRound++; document.getElementById('game-objective').textContent = `Drift: Round ${st.teleRound}/${st.teleMax}`;
                 st.targetRgb = {...st.currentRgb}; st.targetVals = [...st.currentVals]; st.renderedTargetCss = st.renderedUserCss;
                 window.randomizeSliders(); window.renderBoxes();
                 st.timeRemaining = st.timeLimit; window.startTimer(); return;
@@ -1415,11 +1445,11 @@
             if (st.ghostTimer) { cancelAnimationFrame(st.ghostTimer); st.ghostTimer = null; }
 
             st.memoryHidden = false; document.body.classList.remove('darkroom-active');
-            if(st.type === 'telephone' && st.teleRound === 10) st.teleHistory.push({...st.currentRgb}); 
+            if(st.type === 'telephone' && st.teleRound === st.teleMax) st.teleHistory.push({...st.currentRgb}); 
 
             const score = window.calculateScore();
             if (st.type === 'solid' && !st.isWcag) window.saveStats(score, st.currentRgb.r - st.targetRgb.r, st.currentRgb.g - st.targetRgb.g, st.currentRgb.b - st.targetRgb.b);
-            if (score >= 98 && !st.isDuel && st.type !== 'haystack' && st.type !== 'hexdle' && st.type !== 'sort') window.saveToPantheon(st.renderedTargetCss, st.renderedUserCss);
+            if (score >= 98 && !st.isDuel && st.type !== 'haystack' && st.type !== 'hexdle' && st.type !== 'sort' && st.type !== 'telephone') window.saveToPantheon(st.renderedTargetCss, st.renderedUserCss);
 
             if (st.isRush && st.timeRemaining > 0) {
                 if (score >= 90 || (st.type === 'haystack' && st.timeRemaining > 0)) { 
@@ -1516,17 +1546,18 @@
                 document.getElementById('op-label').textContent = `Opponent (${st.duelData.oS}%)`;
                 const win = st.finalScore > st.duelData.oS; document.getElementById('match-percentage').innerHTML = `${st.finalScore}% <div style="font-size:1.5rem; color:${win?'#22c55e':'#ef4444'}; margin-top:10px; font-weight:800;">${win?'VICTORY':'DEFEAT'}</div>`;
             }
+            window.toggleInfo(false); // Clean resets highlights
         }
 
         window.shareDuel = async function() {
             const btn = document.getElementById('btn-challenge');
             const orig = btn.innerHTML; btn.textContent = 'Compressing...';
             try {
-                let packedData = "";
+                let packedData = [];
                 if (st.type === 'telephone') {
-                    st.teleHistory.forEach(rgb => { packedData += String.fromCharCode(rgb.r, rgb.g, rgb.b); });
+                    let str = ""; st.teleHistory.forEach(rgb => { str += String.fromCharCode(rgb.r, rgb.g, rgb.b); }); packedData = str;
                 } else if (st.parsedGhostLog && st.parsedGhostLog.length) {
-                    for(let i=0; i<st.parsedGhostLog.length; i++) packedData += String.fromCharCode(st.parsedGhostLog[i]);
+                    packedData = st.parsedGhostLog;
                 }
 
                 const data = { c: window.getUIConfig(), tSeed: st.type==='haystack'?st.gameSeed:null, tV: (st.type==='solid'||st.type==='midpoint'||st.type==='telephone'||st.type==='luminance')?st.targetVals:null, tN: (st.type==='gradient'||st.type==='midpoint')?st.targetNativeData:null, tD: st.type==='gradient'?st.gradDeg:null, tC: st.type==='palette'?st.targetColorData:null, tCss: st.type==='palette'?st.targetCssData:null, tH: st.type==='hexdle'?st.hexTarget:null, sT: st.type==='sort'?st.sortTarget:null, sC: st.type==='sort'?st.sortCurrent:null, uBase: st.type==='palette'?st.userNativeData[0]:null, uC: st.type==='palette'?st.userCssData:st.renderedUserCss, oS: st.finalScore, gL: packedData };
@@ -1538,8 +1569,8 @@
 
         window.shareScore = function() {
             const getEmoji = (diff) => diff < 15 ? '🟩' : diff < 40 ? '🟨' : '🟥';
-            let str = `Chroma ${st.isDaily?`Daily #${st.dailyNum}`:st.isRush?`Rush (Streak ${st.rushStreak})`:st.isDuel?'Duel':'Freeplay'} | ${st.finalScore}%\nMode: ${st.spaceId.toUpperCase()}`;
-            if(st.type==='gradient') str+=' 🌈'; if(st.type==='palette') str+=' 🎨'; if(st.type==='haystack') str+=' 🔲'; if(st.type==='hexdle') str+=' 🧩'; if(st.type==='telephone') str+=' ☎️'; if(st.type==='midpoint') str+=' ⚖️'; if(st.type==='sort') str+=' 📊'; if(st.type==='luminance') str+=' 💡'; if(st.isTerminal) str+=' ⌨️'; if(st.isMemory) str+=' 🧠'; if(st.isComp) str+=' ☯'; if(st.isWcag) str+=' Aa'; if(st.isHardcore) str+=' 👁'; if(st.isDarkroom) str+=' 📸'; if(st.vision!=='normal') str+=' 🕶'; if(st.isIllusion) str+=' 🌀'; if(st.isMap) str+=' 🗺';
+            let str = `Chroma ${st.isDaily?`Daily #${st.dailyNum}`:st.isRush?`Rush (Streak ${st.rushStreak})`:st.isDuel?'Duel':'Freeplay'} | ${window.typeNames[st.type]} | ${st.finalScore}%\n`;
+            if(st.type==='gradient') str+='🌈'; if(st.type==='palette') str+='🎨'; if(st.type==='haystack') str+='🔲'; if(st.type==='hexdle') str+='🧩'; if(st.type==='telephone') str+='☎️'; if(st.type==='midpoint') str+='⚖️'; if(st.type==='sort') str+='📊'; if(st.type==='luminance') str+='💡'; if(st.isTerminal) str+='⌨️'; if(st.isMemory) str+='🧠'; if(st.isComp) str+='☯'; if(st.isWcag) str+='Aa'; if(st.isHardcore) str+='👁'; if(st.isDarkroom) str+='📸'; if(st.vision!=='normal') str+='🕶'; if(st.isIllusion) str+='🌀'; if(st.isMap) str+='🗺';
             if((st.type==='solid' || st.type==='midpoint' || st.type==='luminance') && !st.isWcag) { const dr=Math.abs(st.targetRgb.r-st.currentRgb.r), dg=Math.abs(st.targetRgb.g-st.currentRgb.g), db=Math.abs(st.targetRgb.b-st.currentRgb.b); str += `\n[RGB] ${getEmoji(dr)}${getEmoji(dg)}${getEmoji(db)}`; }
             navigator.clipboard.writeText(str).then(() => { const b=document.getElementById('btn-share'); const o=b.innerHTML; b.innerHTML='<span>Copied!</span>'; setTimeout(()=>b.innerHTML=o,2000); });
         }
@@ -1572,7 +1603,7 @@
                 } catch(e) { window.clearUrl(); window.setUIConfig(window.loadLocal()); }
             } else if (p.has('share')) {
                 st.isViewingShared = true; document.getElementById('shared-banner').style.display='block';
-                window.setUIConfig({ s:p.get('s'), t:parseInt(p.get('t')), o:p.get('o'), p:p.get('p')||'solid', pr:p.get('pr')||'analogous', v:p.get('v')||'normal', m:p.get('m')==='1', h:p.get('h')==='1', i:p.get('i')==='1', tm:p.get('tm')==='1', mm:p.get('mm')==='1', dk:p.get('dk')==='1' });
+                window.setUIConfig({ s:p.get('s'), t:parseInt(p.get('t')), o:p.get('o'), p:p.get('p')||'solid', pr:p.get('pr')||'analogous', v:p.get('v')||'normal', tr:parseInt(p.get('tr'))||10, m:p.get('m')==='1', h:p.get('h')==='1', i:p.get('i')==='1', tm:p.get('tm')==='1', mm:p.get('mm')==='1', dk:p.get('dk')==='1' });
             } else { window.setUIConfig(window.loadLocal()); }
         };
     </script>
