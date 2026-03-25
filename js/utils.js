@@ -63,3 +63,16 @@ function mulberry32(a) {
 function getDailyRNG(offset = 0) { 
     const start = new Date('2026-03-23T00:00:00Z'); st.dailyNum = Math.floor((new Date() - start)/86400000)+1; return mulberry32(st.dailyNum*42+offset); 
 }
+
+// Explicit Global Exports
+window.compressData = compressData;
+window.decompressData = decompressData;
+window.getRgbFromCss = getRgbFromCss;
+window.hexToRgb = hexToRgb;
+window.isGamutSafe = isGamutSafe;
+window.getLuminance = getLuminance;
+window.getContrast = getContrast;
+window.calcComp = calcComp;
+window.calcPalette = calcPalette;
+window.mulberry32 = mulberry32;
+window.getDailyRNG = getDailyRNG;
