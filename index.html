@@ -69,6 +69,7 @@
         .info-modal h3 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-main); margin: 1.5rem 0 0.8rem 0; border-bottom: 1px solid var(--border); padding-bottom: 4px; }
         .info-modal b { color: var(--text-main); transition: color 0.3s; }
         
+        /* Highlight Rules inside Info */
         .info-modal p { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 0.8rem; line-height: 1.5; transition: 0.3s; border-left: 2px solid transparent; padding-left: 6px; margin-left: -8px; }
         .info-modal p.highlight { color: var(--text-main); border-left-color: var(--accent); background: rgba(255, 255, 255, 0.05); padding: 8px; border-radius: 0 4px 4px 0; }
         .info-modal p.highlight b { color: var(--accent); }
@@ -129,7 +130,7 @@
         #hexdle-controls { margin-bottom: 1.5rem; }
         .hexdle-row { display: flex; gap: 4px; margin-bottom: 4px; justify-content: center; }
         .hexdle-cell { width: 3rem; height: 3rem; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; background: var(--bg); color: var(--text-main); border-radius: 2px; transition: 0.3s; }
-        .hexdle-keyboard { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; max-width: 320px; margin: 1rem auto 0 auto; }
+        .hexdle-keyboard { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; max-width: 280px; margin: 1rem auto 0 auto; }
         .hexdle-key { padding: 8px 12px; border: 1px solid var(--border); border-radius: 2px; background: var(--bg); color: var(--text-main); cursor: pointer; font-family: monospace; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; flex-grow: 1; transition: 0.1s; }
         .hexdle-key:active { transform: scale(0.95); }
         .hx-green { background: #22c55e !important; color: #000 !important; border-color: #22c55e !important; }
@@ -226,7 +227,7 @@
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"></path></svg>
                 </button>
                 <button class="header-btn" onclick="window.toggleSettings(true)" title="Settings">
-                    <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 0-2.83 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
                 </button>
                 <button class="header-btn" onclick="window.toggleInfo(true)" title="Info">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
@@ -414,7 +415,7 @@
                 </label>
                 <label class="mode-toggle" id="lbl-illusion">
                     <input type="checkbox" id="illusion-checkbox" onchange="window.handleToggles()">
-                    <div class="toggle-switch"></div> <span class="color-box-label" style="padding:0;">Illusion Effect</span>
+                    <div class="toggle-switch"></div> <span class="color-box-label" style="padding:0;">Illusion Framing</span>
                 </label>
                 <label class="mode-toggle" id="lbl-darkroom">
                     <input type="checkbox" id="darkroom-checkbox" onchange="window.handleToggles()">
@@ -568,10 +569,10 @@
             
             if (show) {
                 document.querySelectorAll('#info-modal .highlight').forEach(p => p.classList.remove('highlight'));
-                const isGame = document.getElementById('game-area').classList.contains('active');
+                const gameActive = document.getElementById('game-area').classList.contains('active');
                 const isRes = document.getElementById('results-screen').classList.contains('active');
                 
-                if (isGame || isRes) {
+                if (gameActive || isRes) {
                     let rules = [`type-${st.type}`];
                     if (st.spaceId === 'cmyk') rules.push('space-cmyk');
                     if (st.isDarkroom) rules.push('mod-darkroom');
@@ -952,7 +953,11 @@
 
         // --- GHOST SYSTEM (NUCLEAR COMPRESSION) ---
         window.recordGhost = function() {
-            if (st.isMap || st.isTerminal || st.type === 'studio' || st.type === 'haystack' || st.type === 'hexdle' || st.type === 'sort') return; 
+            const mapDisabled = document.getElementById('map-checkbox').disabled || !document.getElementById('map-checkbox').checked;
+            const termDisabled = document.getElementById('terminal-checkbox').disabled || !document.getElementById('terminal-checkbox').checked;
+            
+            if (!mapDisabled || !termDisabled || st.type === 'studio' || st.type === 'haystack' || st.type === 'hexdle' || st.type === 'sort') return; 
+            
             const now = Date.now(); const delta = now - st.lastGhostTime;
             if (delta < 250 && st.parsedGhostLog.length > 0) return; // 4fps max for extreme compression
             
@@ -1062,18 +1067,18 @@
         // --- MAIN GAME LOOP ---
         window.startFreeplay = function() {
             st.isDaily=false; st.isRush=false; const c = window.getUIConfig();
-            st.spaceId=c.s; st.timeLimit=c.t; st.isComp=c.o==='complementary'; st.isWcag=c.o==='wcag'; st.type=c.p; st.palRule=c.pr; st.vision=c.v; st.isMap=c.m; st.isHardcore=c.h; st.isIllusion=c.i; st.isTerminal=c.tm; st.isMemory=c.mm; st.isDarkroom=c.dk;
+            st.spaceId=c.s; st.timeLimit=c.t; st.isComp=c.o==='complementary'; st.isWcag=c.o==='wcag'; st.type=c.p; st.palRule=c.pr; st.vision=c.v; st.isMap=c.m; st.isHardcore=c.h; st.isIllusion=c.i; st.isTerminal=c.tm; st.isMemory=c.mm; st.isDarkroom=c.dk; st.teleMax=c.tr;
             document.getElementById('shared-banner').style.display='none'; window.executeGameStart();
         }
         window.startRush = function() {
             st.isDaily=false; st.isRush=true; st.rushStreak=0; const c = window.getUIConfig();
-            st.spaceId=c.s; st.timeLimit=60; st.isComp=c.o==='complementary'; st.isWcag=c.o==='wcag'; st.type=c.p; st.palRule=c.pr; st.vision=c.v; st.isMap=c.m; st.isHardcore=c.h; st.isIllusion=c.i; st.isTerminal=c.tm; st.isMemory=c.mm; st.isDarkroom=c.dk;
+            st.spaceId=c.s; st.timeLimit=60; st.isComp=c.o==='complementary'; st.isWcag=c.o==='wcag'; st.type=c.p; st.palRule=c.pr; st.vision=c.v; st.isMap=c.m; st.isHardcore=c.h; st.isIllusion=c.i; st.isTerminal=c.tm; st.isMemory=c.mm; st.isDarkroom=c.dk; st.teleMax=c.tr;
             document.getElementById('shared-banner').style.display='none'; window.executeGameStart();
         }
         window.acceptDuel = function() {
             st.isDaily=false; st.isRush=false; 
             window.setUIConfig(st.duelData.c); const c = window.getUIConfig();
-            st.spaceId=c.s; st.timeLimit=c.t; st.isComp=c.o==='complementary'; st.isWcag=c.o==='wcag'; st.type=c.p; st.palRule=c.pr; st.vision=c.v; st.isMap=c.m; st.isHardcore=c.h; st.isIllusion=c.i; st.isTerminal=c.tm; st.isMemory=c.mm; st.isDarkroom=c.dk;
+            st.spaceId=c.s; st.timeLimit=c.t; st.isComp=c.o==='complementary'; st.isWcag=c.o==='wcag'; st.type=c.p; st.palRule=c.pr; st.vision=c.v; st.isMap=c.m; st.isHardcore=c.h; st.isIllusion=c.i; st.isTerminal=c.tm; st.isMemory=c.mm; st.isDarkroom=c.dk; st.teleMax=c.tr;
             document.getElementById('duel-banner').style.display='none'; window.executeGameStart();
         }
         window.playAgain = function() { if (st.type === 'studio') { window.resetGame(); } else if (st.isRush) { window.startRush(); } else if (st.isDuel) { window.acceptDuel(); } else { window.executeGameStart(); } }
@@ -1554,7 +1559,7 @@
                 } else if (st.type === 'telephone') {
                     oBox.innerHTML=''; 
                     if (st.duelData.gL && st.duelData.gL.length) {
-                        for(let i=0; i<st.duelData.gL.length; i+=3) { const d = document.createElement('div'); d.style.flex='1'; d.style.height='100%'; d.style.background=`rgb(${st.duelData.gL[i]},${st.duelData.gL[i+1]},${st.duelData.gL[i+2]})`; oBox.appendChild(d); }
+                        for(let i=0; i<st.duelData.gL.length; i+=3) { const d = document.createElement('div'); d.style.flex='1'; d.style.height='100%'; d.style.background=`rgb(${st.duelData.gL.charCodeAt(i)},${st.duelData.gL.charCodeAt(i+1)},${st.duelData.gL.charCodeAt(i+2)})`; oBox.appendChild(d); }
                     }
                 } else if (st.type === 'sort') {
                     oBox.innerHTML=''; st.duelData.sC.forEach(rgb => { const d = document.createElement('div'); d.style.flex='1'; d.style.height='100%'; d.style.background=`rgb(${rgb.r},${rgb.g},${rgb.b})`; oBox.appendChild(d); });
@@ -1571,7 +1576,7 @@
             try {
                 let packedData = [];
                 if (st.type === 'telephone') {
-                    st.teleHistory.forEach(rgb => { packedData.push(rgb.r, rgb.g, rgb.b); });
+                    let str = ""; st.teleHistory.forEach(rgb => { str += String.fromCharCode(rgb.r, rgb.g, rgb.b); }); packedData = str;
                 } else if (st.parsedGhostLog && st.parsedGhostLog.length) {
                     packedData = st.parsedGhostLog;
                 }
