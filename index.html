@@ -111,8 +111,10 @@
         .color-boxes { display: flex; gap: 2px; justify-content: center; margin: 0 0 1.5rem 0; }
         .illusion-frame { flex: 1; padding: 1px; background: var(--border); border-radius: 4px; transition: padding 0.3s, background-color 0.3s; }
         .illusion-frame.active-illusion { padding: 16px; }
-        .color-box { width: 100%; aspect-ratio: 1.2/1; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 0.7rem; font-weight: 600; text-align: center; letter-spacing: 0.05em; color: var(--text-main); overflow: hidden; border-radius: 2px; position: relative; }
+        .color-box { width: 100%; aspect-ratio: 1.2/1; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 0.7rem; font-weight: 600; text-align: center; letter-spacing: 0.05em; color: var(--text-main); overflow: hidden; border-radius: 2px; position: relative; transition: height 0.3s; }
         .color-box-label { display: block; padding: 10px 0; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.1em; text-align: center; }
+        
+        .is-hexdle .color-box { aspect-ratio: unset; height: 50px; }
         
         /* Special Grid UIs */
         .haystack-grid { display: grid; gap: 2px; width: 100%; aspect-ratio: 1/1; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 1.5rem; }
@@ -125,9 +127,9 @@
 
         /* Hexdle Board */
         #hexdle-controls { margin-bottom: 1.5rem; }
-        .hexdle-row { display: flex; gap: 6px; margin-bottom: 6px; justify-content: center; }
-        .hexdle-cell { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; background: var(--bg); color: var(--text-main); border-radius: 2px; transition: 0.3s; }
-        .hexdle-keyboard { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; max-width: 280px; margin: 1rem auto 0 auto; }
+        .hexdle-row { display: flex; gap: 4px; margin-bottom: 4px; justify-content: center; }
+        .hexdle-cell { width: 3rem; height: 3rem; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; background: var(--bg); color: var(--text-main); border-radius: 2px; transition: 0.3s; }
+        .hexdle-keyboard { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; max-width: 320px; margin: 1rem auto 0 auto; }
         .hexdle-key { padding: 8px 12px; border: 1px solid var(--border); border-radius: 2px; background: var(--bg); color: var(--text-main); cursor: pointer; font-family: monospace; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; flex-grow: 1; transition: 0.1s; }
         .hexdle-key:active { transform: scale(0.95); }
         .hx-green { background: #22c55e !important; color: #000 !important; border-color: #22c55e !important; }
@@ -184,6 +186,7 @@
         .btn-daily { border-color: #3b82f6; color: #3b82f6; } .btn-daily:hover { background: #3b82f6; color: var(--bg); border-color: #3b82f6; }
         .btn-share { border-color: #22c55e; color: #22c55e; } .btn-share:hover { background: #22c55e; color: var(--bg); border-color: #22c55e; }
         .btn-lock { background: var(--text-main); color: var(--bg); margin-top: 1.5rem; } .btn-lock:hover { background: var(--text-muted); color: var(--bg); border-color: var(--text-muted); }
+        .btn-exit-studio { border-color: var(--border); color: var(--text-muted); margin-top: 1.5rem; } .btn-exit-studio:hover { background: var(--text-muted); color: var(--bg); }
 
         .match-percentage { font-size: 5rem; font-weight: 200; color: var(--text-main); margin: 1rem 0; letter-spacing: -0.05em; }
         .status-text { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 2rem; }
@@ -223,7 +226,7 @@
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"></path></svg>
                 </button>
                 <button class="header-btn" onclick="window.toggleSettings(true)" title="Settings">
-                    <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 0-2.83 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
                 </button>
                 <button class="header-btn" onclick="window.toggleInfo(true)" title="Info">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
@@ -411,7 +414,7 @@
                 </label>
                 <label class="mode-toggle" id="lbl-illusion">
                     <input type="checkbox" id="illusion-checkbox" onchange="window.handleToggles()">
-                    <div class="toggle-switch"></div> <span class="color-box-label" style="padding:0;">Illusion Framing</span>
+                    <div class="toggle-switch"></div> <span class="color-box-label" style="padding:0;">Illusion Effect</span>
                 </label>
                 <label class="mode-toggle" id="lbl-darkroom">
                     <input type="checkbox" id="darkroom-checkbox" onchange="window.handleToggles()">
@@ -496,7 +499,11 @@
                     <div class="slider-group" id="group-s3"><div class="slider-header"><span id="lbl-s3">CH 3</span><span class="slider-value" id="val-s3">0</span></div><input type="range" id="slider-3" oninput="window.updateColor()"><div class="ghost-thumb" id="g-3"></div></div>
                     <div class="slider-group" id="group-s4" style="display:none;"><div class="slider-header"><span id="lbl-s4">CH 4</span><span class="slider-value" id="val-s4">0</span></div><input type="range" id="slider-4" oninput="window.updateColor()"><div class="ghost-thumb" id="g-4"></div></div>
                 </div>
-                <button class="btn-lock" id="btn-lock" onclick="window.lockIn()">Lock In</button>
+                
+                <div id="lock-btn-container" style="display:flex; gap:10px;">
+                    <button class="btn-lock" id="btn-lock" onclick="window.lockIn()">Lock In</button>
+                    <button class="btn-exit-studio" id="btn-exit-studio" style="display:none;" onclick="window.goHome()">Exit Studio</button>
+                </div>
             </div>
         </div>
 
@@ -549,16 +556,22 @@
         }
 
         // --- GLOBALS ---
+        window.typeNames = {
+            solid: "Solid Color", luminance: "Luminance Match", hexdle: "Hex-dle", haystack: "Haystack",
+            sort: "Color Sort", telephone: "Telephone", midpoint: "Midpoint", gradient: "Gradient Matcher",
+            palette: "Palette", studio: "Studio Mode"
+        };
+
         window.toggleInfo = function(show) { 
             const modal = document.getElementById('info-modal');
             modal.style.display = show ? 'block' : 'none'; 
             
             if (show) {
-                document.querySelectorAll('#info-modal p').forEach(p => p.classList.remove('highlight'));
-                const gameActive = document.getElementById('game-area').classList.contains('active');
+                document.querySelectorAll('#info-modal .highlight').forEach(p => p.classList.remove('highlight'));
+                const isGame = document.getElementById('game-area').classList.contains('active');
                 const isRes = document.getElementById('results-screen').classList.contains('active');
                 
-                if (gameActive || isRes) {
+                if (isGame || isRes) {
                     let rules = [`type-${st.type}`];
                     if (st.spaceId === 'cmyk') rules.push('space-cmyk');
                     if (st.isDarkroom) rules.push('mod-darkroom');
@@ -614,12 +627,6 @@
             sort: `<svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M4 15l4 4 4-4M16 9l-4-4-4 4"/></svg>`,
             luminance: `<svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
             darkroom: `<svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"></path></svg>`
-        };
-
-        const typeNames = {
-            solid: "Solid Color", luminance: "Luminance Match", hexdle: "Hex-dle", haystack: "Haystack",
-            sort: "Color Sort", telephone: "Telephone", midpoint: "Midpoint", gradient: "Gradient Matcher",
-            palette: "Palette", studio: "Studio Mode"
         };
 
         const spaces = {
@@ -821,10 +828,17 @@
         }
 
         window.getUIConfig = function() {
+            const mChk = document.getElementById('map-checkbox');
+            const hChk = document.getElementById('hardcore-checkbox');
+            const tmChk = document.getElementById('terminal-checkbox');
+            const mmChk = document.getElementById('memory-checkbox');
+            const iChk = document.getElementById('illusion-checkbox');
+            const dkChk = document.getElementById('darkroom-checkbox');
+            
             return {
                 s: document.querySelector('input[name="colorSpace"]:checked').value, t: parseInt(document.getElementById('timer-select').value),
                 o: document.getElementById('objective-select').value, p: document.getElementById('type-select').value, pr: document.getElementById('palette-rule').value, v: document.getElementById('vision-select').value, tr: parseInt(document.getElementById('telephone-rounds').value),
-                m: document.getElementById('map-checkbox').checked, h: document.getElementById('hardcore-checkbox').checked, i: document.getElementById('illusion-checkbox').checked, tm: document.getElementById('terminal-checkbox').checked, mm: document.getElementById('memory-checkbox').checked, dk: document.getElementById('darkroom-checkbox').checked
+                m: !mChk.disabled && mChk.checked, h: !hChk.disabled && hChk.checked, i: !iChk.disabled && iChk.checked, tm: !tmChk.disabled && tmChk.checked, mm: !mmChk.disabled && mmChk.checked, dk: !dkChk.disabled && dkChk.checked
             };
         }
 
@@ -938,11 +952,7 @@
 
         // --- GHOST SYSTEM (NUCLEAR COMPRESSION) ---
         window.recordGhost = function() {
-            const mapDisabled = document.getElementById('map-checkbox').disabled || !document.getElementById('map-checkbox').checked;
-            const termDisabled = document.getElementById('terminal-checkbox').disabled || !document.getElementById('terminal-checkbox').checked;
-            
-            if (!mapDisabled || !termDisabled || st.type === 'studio' || st.type === 'haystack' || st.type === 'hexdle' || st.type === 'sort') return; 
-            
+            if (st.isMap || st.isTerminal || st.type === 'studio' || st.type === 'haystack' || st.type === 'hexdle' || st.type === 'sort') return; 
             const now = Date.now(); const delta = now - st.lastGhostTime;
             if (delta < 250 && st.parsedGhostLog.length > 0) return; // 4fps max for extreme compression
             
@@ -1037,7 +1047,9 @@
                 if (st.hexCurrentGuess.length === 6) {
                     st.hexGuesses.push(st.hexCurrentGuess);
                     if (st.hexCurrentGuess === st.hexTarget || st.hexGuesses.length === 6) { 
-                        st.currentRgb = window.hexToRgb(st.hexGuesses[st.hexGuesses.length - 1]);
+                        const lastGuess = st.hexGuesses[st.hexGuesses.length - 1];
+                        st.currentRgb = window.hexToRgb(lastGuess);
+                        st.renderedUserCss = `#${lastGuess}`;
                         window.lockIn(); 
                     } else { st.hexCurrentGuess = ""; window.renderHexdle(); }
                 }
@@ -1084,10 +1096,11 @@
 
             document.getElementById('setup-screen').classList.remove('active'); document.getElementById('daily-screen').classList.remove('active'); document.getElementById('results-screen').classList.remove('active');
             document.getElementById('game-area').classList.add('active');
+            document.getElementById('game-area').className = 'game-area active ' + (st.type === 'hexdle' ? 'is-hexdle' : '');
             
             if (st.isDarkroom) document.body.classList.add('darkroom-active'); else document.body.classList.remove('darkroom-active');
 
-            // Force dynamic modifiers check via disabled attributes
+            // Force dynamic modifiers check
             st.isMap = document.getElementById('map-checkbox').checked && !document.getElementById('map-checkbox').disabled;
             st.isHardcore = document.getElementById('hardcore-checkbox').checked && !document.getElementById('hardcore-checkbox').disabled;
             st.isTerminal = document.getElementById('terminal-checkbox').checked && !document.getElementById('terminal-checkbox').disabled;
@@ -1127,9 +1140,11 @@
             
             if (st.type === 'studio') {
                 document.getElementById('frame-target').style.display = 'none'; document.getElementById('frame-user').style.flex = '2'; document.getElementById('timer').style.display = 'none';
-                document.getElementById('game-objective').textContent = "Studio Mode (Utility)"; document.getElementById('game-objective').style.color = 'var(--text-muted)'; btnLock.textContent = 'Generate Code';
+                document.getElementById('game-objective').textContent = "Studio Mode (Utility)"; document.getElementById('game-objective').style.color = 'var(--text-muted)'; 
+                btnLock.textContent = 'Generate Code'; document.getElementById('btn-exit-studio').style.display = 'block';
             } else {
-                document.getElementById('frame-target').style.display = 'block'; document.getElementById('frame-user').style.flex = '1'; document.getElementById('timer').style.display = (st.type==='hexdle' || st.type==='sort') ? 'none' : 'block'; btnLock.textContent = 'Lock In';
+                document.getElementById('frame-target').style.display = 'block'; document.getElementById('frame-user').style.flex = '1'; document.getElementById('timer').style.display = (st.type==='hexdle' || st.type==='sort') ? 'none' : 'block'; 
+                btnLock.textContent = 'Lock In'; document.getElementById('btn-exit-studio').style.display = 'none';
             }
 
             const rb = document.getElementById('rush-badge');
@@ -1154,8 +1169,8 @@
                 if (st.isDuel && st.duelData.gL && st.duelData.gL.length > 0) {
                     let absTime = 0; st.parsedGhostLog = [];
                     for (let i = 0; i < st.duelData.gL.length; i += 7) {
-                        absTime += st.duelData.gL.charCodeAt(i);
-                        st.parsedGhostLog.push({ ms: absTime, t: st.duelData.gL.charCodeAt(i+1), d: st.duelData.gL.charCodeAt(i+2), v: [st.duelData.gL.charCodeAt(i+3), st.duelData.gL.charCodeAt(i+4), st.duelData.gL.charCodeAt(i+5), st.duelData.gL.charCodeAt(i+6)] });
+                        absTime += st.duelData.gL[i];
+                        st.parsedGhostLog.push({ ms: absTime, t: st.duelData.gL[i+1], d: st.duelData.gL[i+2], v: [st.duelData.gL[i+3], st.duelData.gL[i+4], st.duelData.gL[i+5], st.duelData.gL[i+6]] });
                     }
                     st.ghostTimer = requestAnimationFrame(window.playbackGhost);
                 }
@@ -1168,7 +1183,7 @@
             const gridEl = document.getElementById('haystack-grid');
             
             let size = Math.min(10, 2 + Math.floor(st.haystackLevel / 3));
-            let diff = Math.max(14, 50 - (st.haystackLevel * 2.5)); 
+            let diff = Math.max(18, 60 - (st.haystackLevel * 3)); 
             
             gridEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`; gridEl.style.gridTemplateRows = `repeat(${size}, 1fr)`;
             gridEl.innerHTML = '';
@@ -1209,6 +1224,7 @@
                     } else if (st.type === 'gradient' || st.type === 'midpoint') { tBox.style.background = st.renderedTargetCss;
                     } else {
                         tBox.style.background = st.renderedTargetCss;
+                        document.getElementById('target-label').textContent = st.isWcag ? 'Background' : 'Reference';
                         if (st.isWcag) {
                             tBox.innerHTML = `<span style="font-size:1.8rem; font-family:sans-serif; color:${st.renderedUserCss};">Aa</span><div style="position:absolute; bottom:4px; font-size:0.5rem; text-shadow:none; color:${st.renderedUserCss};">WCAG 4.5:1</div>`;
                         } else if (st.isHardcore && !st.isMemory) { tBox.style.background = 'var(--bg)'; tBox.textContent = st.renderedTargetCss; }
@@ -1244,7 +1260,7 @@
             const rngWrapper = () => Math.random(); const rng = st.isDaily ? window.getDailyRNG(st.dailyChallengeId + st.rushStreak) : rngWrapper;
             const ft = document.getElementById('frame-target'); const fu = document.getElementById('frame-user'); const c = spaces[st.spaceId];
             
-            if (st.isIllusion) { ft.classList.add('active-illusion'); fu.classList.add('active-illusion'); ft.style.backgroundColor = `hsl(${Math.floor(rng()*360)},100%,50%)`; fu.style.backgroundColor = `hsl(${Math.floor(rng()*360)},100%,50%)`;
+            if (st.isIllusion && st.type !== 'luminance') { ft.classList.add('active-illusion'); fu.classList.add('active-illusion'); ft.style.backgroundColor = `hsl(${Math.floor(rng()*360)},100%,50%)`; fu.style.backgroundColor = `hsl(${Math.floor(rng()*360)},100%,50%)`;
             } else { ft.classList.remove('active-illusion'); fu.classList.remove('active-illusion'); ft.style.backgroundColor = 'var(--border)'; fu.style.backgroundColor = 'var(--border)'; }
 
             const tBox = document.getElementById('target-color'); const uBox = document.getElementById('user-color'); const tLbl = document.getElementById('target-label');
@@ -1538,7 +1554,7 @@
                 } else if (st.type === 'telephone') {
                     oBox.innerHTML=''; 
                     if (st.duelData.gL && st.duelData.gL.length) {
-                        for(let i=0; i<st.duelData.gL.length; i+=3) { const d = document.createElement('div'); d.style.flex='1'; d.style.height='100%'; d.style.background=`rgb(${st.duelData.gL.charCodeAt(i)},${st.duelData.gL.charCodeAt(i+1)},${st.duelData.gL.charCodeAt(i+2)})`; oBox.appendChild(d); }
+                        for(let i=0; i<st.duelData.gL.length; i+=3) { const d = document.createElement('div'); d.style.flex='1'; d.style.height='100%'; d.style.background=`rgb(${st.duelData.gL[i]},${st.duelData.gL[i+1]},${st.duelData.gL[i+2]})`; oBox.appendChild(d); }
                     }
                 } else if (st.type === 'sort') {
                     oBox.innerHTML=''; st.duelData.sC.forEach(rgb => { const d = document.createElement('div'); d.style.flex='1'; d.style.height='100%'; d.style.background=`rgb(${rgb.r},${rgb.g},${rgb.b})`; oBox.appendChild(d); });
@@ -1546,7 +1562,7 @@
                 document.getElementById('op-label').textContent = `Opponent (${st.duelData.oS}%)`;
                 const win = st.finalScore > st.duelData.oS; document.getElementById('match-percentage').innerHTML = `${st.finalScore}% <div style="font-size:1.5rem; color:${win?'#22c55e':'#ef4444'}; margin-top:10px; font-weight:800;">${win?'VICTORY':'DEFEAT'}</div>`;
             }
-            window.toggleInfo(false); // Clean resets highlights
+            window.toggleInfo(false); 
         }
 
         window.shareDuel = async function() {
@@ -1555,7 +1571,7 @@
             try {
                 let packedData = [];
                 if (st.type === 'telephone') {
-                    let str = ""; st.teleHistory.forEach(rgb => { str += String.fromCharCode(rgb.r, rgb.g, rgb.b); }); packedData = str;
+                    st.teleHistory.forEach(rgb => { packedData.push(rgb.r, rgb.g, rgb.b); });
                 } else if (st.parsedGhostLog && st.parsedGhostLog.length) {
                     packedData = st.parsedGhostLog;
                 }
