@@ -229,7 +229,6 @@ function copyConfigUrl() {
 
 function acceptSharedConfig() { st.isViewingShared = false; document.getElementById('shared-banner').style.display = 'none'; saveLocal(); clearUrl(); }
 function discardSharedConfig() { st.isViewingShared = false; document.getElementById('shared-banner').style.display = 'none'; document.getElementById('duel-banner').style.display = 'none'; st.isDuel = false; setUIConfig(loadLocal()); clearUrl(); }
-document.querySelectorAll('#setup-screen input, #setup-screen select').forEach(el => el.addEventListener('change', () => { if(st.isViewingShared){ st.isViewingShared=false; document.getElementById('shared-banner').style.display='none'; clearUrl(); } saveLocal(); }));
 
 function changeColorSpace() {
     if (st.suppressSave) return;
@@ -335,14 +334,50 @@ function renderBoxes() {
     }
 }
 
-function switchUITab(idx) {
-    st.uiTab = idx; document.querySelectorAll('.ui-tab').forEach((el, i) => { if(!el.hasAttribute('style')) el.classList.toggle('active', i === idx); });
-    const vals = st.userNativeData[idx]; [1,2,3,4].forEach(n => { if(spaces[st.spaceId][`s${n}`]) { document.getElementById(`slider-${n}`).value = vals[n-1] || 0; document.getElementById(`val-s${n}`).textContent = (vals[n-1]||0).toString().padStart(3,'0'); } });
-    recordGhost();
-}
+// Ensure the UI script properly listens to changes
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('#setup-screen input, #setup-screen select').forEach(el => {
+        el.addEventListener('change', () => { 
+            if(st.isViewingShared){ st.isViewingShared=false; document.getElementById('shared-banner').style.display='none'; clearUrl(); } 
+            saveLocal(); 
+        });
+    });
+});
 
-function updateTerminal() { 
-    const str = document.getElementById('terminal-input').value; 
-    st.renderedUserCss = str; document.getElementById('user-color').style.background = str; st.currentRgb = getRgbFromCss(str); 
-    renderBoxes(); 
-}
+// Explicit Global Exports
+window.toggleInfo = toggleInfo;
+window.toggleSettings = toggleSettings;
+window.goHome = goHome;
+window.initTheme = initTheme;
+window.setTheme = setTheme;
+window.resetTheme = resetTheme;
+window.handleVision = handleVision;
+window.triggerConfirm = triggerConfirm;
+window.closeConfirm = closeConfirm;
+window.executeConfirm = executeConfirm;
+window.resetConfig = resetConfig;
+window.resetPantheon = resetPantheon;
+window.resetAnalytics = resetAnalytics;
+window.resetAll = resetAll;
+window.loadPantheon = loadPantheon;
+window.saveToPantheon = saveToPantheon;
+window.togglePantheon = togglePantheon;
+window.showPantheonDetails = showPantheonDetails;
+window.loadStats = loadStats;
+window.saveStats = saveStats;
+window.toggleStats = toggleStats;
+window.handleTypeChange = handleTypeChange;
+window.handleToggles = handleToggles;
+window.getUIConfig = getUIConfig;
+window.setUIConfig = setUIConfig;
+window.saveLocal = saveLocal;
+window.loadLocal = loadLocal;
+window.clearUrl = clearUrl;
+window.copyConfigUrl = copyConfigUrl;
+window.acceptSharedConfig = acceptSharedConfig;
+window.discardSharedConfig = discardSharedConfig;
+window.changeColorSpace = changeColorSpace;
+window.toggleDailyMenu = toggleDailyMenu;
+window.generateDailyConfigs = generateDailyConfigs;
+window.buildFlexBoxes = buildFlexBoxes;
+window.renderBoxes = renderBoxes;
