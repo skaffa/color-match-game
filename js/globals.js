@@ -1,4 +1,4 @@
-const svgs = {
+var svgs = {
     complementary: `<svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg>`,
     blind: `<svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`,
     map: `<svg class="icon icon-sm" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>`,
@@ -19,13 +19,13 @@ const svgs = {
     darkroom: `<svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"></path></svg>`
 };
 
-const typeNames = {
+var typeNames = {
     solid: "Solid Color", luminance: "Luminance Match", hexdle: "Hex-dle", haystack: "Haystack",
     sort: "Color Sort", telephone: "Telephone", midpoint: "Midpoint", gradient: "Gradient Matcher",
     palette: "Palette", studio: "Studio Mode"
 };
 
-const spaces = {
+var spaces = {
     rgb: { s1:{lbl:'R',min:0,max:255,val:128}, s2:{lbl:'G',min:0,max:255,val:128}, s3:{lbl:'B',min:0,max:255,val:128}, fmt:(v)=>`#${v[0].toString(16).padStart(2,'0')}${v[1].toString(16).padStart(2,'0')}${v[2].toString(16).padStart(2,'0')}`.toUpperCase() },
     hsl: { s1:{lbl:'H',min:0,max:360,val:180}, s2:{lbl:'S',min:0,max:100,val:50}, s3:{lbl:'L',min:0,max:100,val:50}, fmt:(v)=>`hsl(${v[0]}, ${v[1]}%, ${v[2]}%)` },
     oklab: { s1:{lbl:'L',min:0,max:100,val:50}, s2:{lbl:'A',min:-100,max:100,val:0}, s3:{lbl:'B',min:-100,max:100,val:0}, fmt:(v)=>`oklab(${v[0]}% ${+(v[1]/100*0.2).toFixed(4)} ${+(v[2]/100*0.2).toFixed(4)})` },
@@ -35,9 +35,9 @@ const spaces = {
     }
 };
 
-const defaultCfg = { s: 'rgb', t: 30, o: 'match', p: 'solid', pr: 'analogous', v: 'normal', m: false, h: false, i: false, tm: false, mm: false, dk: false, tr: 10 };
+var defaultCfg = { s: 'rgb', t: 30, o: 'match', p: 'solid', pr: 'analogous', v: 'normal', m: false, h: false, i: false, tm: false, mm: false, dk: false, tr: 10 };
 
-let st = {
+var st = {
     isDaily:false, dailyId:null, isViewingShared:false, suppressSave:false,
     isRush:false, rushStreak:0, isDuel:false, duelData:null, gameSeed: 0,
     spaceId:'rgb', timeLimit:30, timeRemaining:0, timer:null, memoryTimeout:null, memoryHidden:false,
@@ -56,5 +56,5 @@ let st = {
     sortTarget: [], sortCurrent: [], sortSelectedIdx: -1
 };
 
-const hiddenCtx = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
+var hiddenCtx = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
 hiddenCtx.canvas.width = 1; hiddenCtx.canvas.height = 1;
