@@ -117,8 +117,8 @@
         /* Special Hexdle Frames */
         .color-boxes.is-hexdle { flex-direction: column; gap: 10px; margin-bottom: 1rem; }
         .color-boxes.is-hexdle .illusion-frame { flex: none; width: 100%; }
-        .game-area.is-hexdle #frame-target { height: 3rem; margin-bottom: 0; padding: 0; border: none; }
-        .game-area.is-hexdle #target-color { aspect-ratio: unset; height: 100%; }
+        .color-boxes.is-hexdle #frame-target { height: 3rem; margin-bottom: 0; padding: 0; border: none; }
+        .color-boxes.is-hexdle #target-color { aspect-ratio: unset; height: 100%; }
         
         /* Special Grid UIs */
         .haystack-grid { display: grid; gap: 2px; width: 100%; aspect-ratio: 1/1; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 1.5rem; }
@@ -477,13 +477,17 @@
                 <div id="hexdle-controls" style="display: none;">
                     <div id="hexdle-board"></div>
                     <div class="hexdle-keyboard" id="hexdle-keyboard">
-                        </div>
+                        <script>
+                            const keys = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','DEL','ENT'];
+                            keys.forEach(k => document.write(`<div class="hexdle-key" id="hk-${k}" onclick="handleHexKey('${k}')">${k}</div>`));
+                        </script>
+                    </div>
                 </div>
 
                 <div id="terminal-controls" style="display: none;">
                     <div class="terminal-input-wrapper">
                         <span class="terminal-prompt">&gt;</span>
-                        <input type="text" id="terminal-input" placeholder="e.g. #FF4500 or hsl(180, 50%, 50%)" spellcheck="false" autocomplete="off">
+                        <input type="text" id="terminal-input" placeholder="e.g. #FF4500 or hsl(180, 50%, 50%)" spellcheck="false" autocomplete="off" oninput="updateTerminal()">
                     </div>
                 </div>
 
@@ -494,11 +498,11 @@
                 <div id="standard-controls">
                     <div class="tabs-container" id="ui-tabs" style="display:none;"></div>
 
-                    <div class="slider-group" id="group-deg" style="display:none;"><div class="slider-header"><span>Rotation (Deg)</span><span class="slider-value" id="val-deg">180</span></div><input type="range" id="slider-deg" min="0" max="360" value="180"><div class="ghost-thumb" id="g-deg"></div></div>
-                    <div class="slider-group" id="group-s1"><div class="slider-header"><span id="lbl-s1">CH 1</span><span class="slider-value" id="val-s1">0</span></div><input type="range" id="slider-1"><div class="ghost-thumb" id="g-1"></div></div>
-                    <div class="slider-group" id="group-s2"><div class="slider-header"><span id="lbl-s2">CH 2</span><span class="slider-value" id="val-s2">0</span></div><input type="range" id="slider-2"><div class="ghost-thumb" id="g-2"></div></div>
-                    <div class="slider-group" id="group-s3"><div class="slider-header"><span id="lbl-s3">CH 3</span><span class="slider-value" id="val-s3">0</span></div><input type="range" id="slider-3"><div class="ghost-thumb" id="g-3"></div></div>
-                    <div class="slider-group" id="group-s4" style="display:none;"><div class="slider-header"><span id="lbl-s4">CH 4</span><span class="slider-value" id="val-s4">0</span></div><input type="range" id="slider-4"><div class="ghost-thumb" id="g-4"></div></div>
+                    <div class="slider-group" id="group-deg" style="display:none;"><div class="slider-header"><span>Rotation (Deg)</span><span class="slider-value" id="val-deg">180</span></div><input type="range" id="slider-deg" min="0" max="360" value="180" oninput="updateColor()"><div class="ghost-thumb" id="g-deg"></div></div>
+                    <div class="slider-group" id="group-s1"><div class="slider-header"><span id="lbl-s1">CH 1</span><span class="slider-value" id="val-s1">0</span></div><input type="range" id="slider-1" oninput="updateColor()"><div class="ghost-thumb" id="g-1"></div></div>
+                    <div class="slider-group" id="group-s2"><div class="slider-header"><span id="lbl-s2">CH 2</span><span class="slider-value" id="val-s2">0</span></div><input type="range" id="slider-2" oninput="updateColor()"><div class="ghost-thumb" id="g-2"></div></div>
+                    <div class="slider-group" id="group-s3"><div class="slider-header"><span id="lbl-s3">CH 3</span><span class="slider-value" id="val-s3">0</span></div><input type="range" id="slider-3" oninput="updateColor()"><div class="ghost-thumb" id="g-3"></div></div>
+                    <div class="slider-group" id="group-s4" style="display:none;"><div class="slider-header"><span id="lbl-s4">CH 4</span><span class="slider-value" id="val-s4">0</span></div><input type="range" id="slider-4" oninput="updateColor()"><div class="ghost-thumb" id="g-4"></div></div>
                 </div>
                 
                 <div id="lock-btn-container" style="display:flex; gap:10px;">
